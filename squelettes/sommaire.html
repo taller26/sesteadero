@@ -16,24 +16,7 @@
 <INCLURE{fond=inclures/topbar, env}></INCLURE>
 
 <!-- NAVBAR -->
-<nav class="navbar">
-  <div class="inner">
-    <div class="logo">
-      <span>I.E.</span><span>El Sesteadero</span>
-    </div>
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#" class="active">Inicio</a></li>
-      <li><a href="#about">10 Camninos pedagógicos</a></li>
-      <li><a href="#courses">Galería</a></li>
-      <li><a href="#teachers">Aves</a></li>
-      <li><a href="#events">Producciones</a></li>
-      <li><a href="#contact" class="nav-cta">Contacto</a></li>
-    </ul>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
+<INCLURE{fond=inclures/navbar, env}></INCLURE>
 
 <!-- HERO -->
 <section class="hero">
@@ -48,7 +31,7 @@
   </div>
 </section>
 
-<!-- STATS BAR -->
+<!-- STATS BAR
 <div class="stats-bar">
   <div class="inner">
     <div class="stat-item">
@@ -69,6 +52,8 @@
     </div>
   </div>
 </div>
+ -->
+
 
 <!-- ABOUT -->
 <section class="about" id="about">
@@ -429,85 +414,17 @@
   </div>
 </section>
 
+
+
 <!-- FOOTER -->
-<footer>
-  <div class="footer-top">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="logo"><span style="color:#7fc8ed">I.E</span><span style="color:var(--orange)">El Sesteadero</span></div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eu sapien eget neque sollicitudin consequat eu ut eros.</p>
-        <div class="footer-social">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-youtube"></i></a>
-          <a href="#"><i class="fab fa-linkedin-in"></i></a>
-        </div>
-      </div>
-      <div>
-        <h5>Accesos rápidos</h5>
-        <ul>
-          <li><a href="#"><i class="fa fa-chevron-right"></i> 10C aminos pedagógicos</a></li>
-          <li><a href="#"><i class="fa fa-chevron-right"></i> Galería</a></li>
-          <li><a href="#"><i class="fa fa-chevron-right"></i> Aves</a></li>
-          <li><a href="#"><i class="fa fa-chevron-right"></i> Producciones audio visuales</a></li>
-          <li><a href="#"><i class="fa fa-chevron-right"></i> Noticias</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5>Nuestras materias</h5>
-        <ul>
-          <li><a href="#"><i class="fa fa-chevron-right"></i> Nasa yuwe</a></li>
-          <li><a href="#"><i class="fa fa-chevron-right"></i> Matematicas</a></li>
-          <li><a href="#"><i class="fa fa-chevron-right"></i> Ciencias naturales</a></li>
-          <li><a href="#"><i class="fa fa-chevron-right"></i> Ecología</a></li>
-          <li><a href="#"><i class="fa fa-chevron-right"></i> Biologia y Ciencias</a></li>
-        </ul>
-      </div>
-      <div>
-        <h5>Contact Info</h5>
-        <ul>
-          <li><a href="#"><i class="fa fa-map-marker-alt"></i> Vereda el sesteadero</a></li>
-          <li><a href="#"><i class="fa fa-phone"></i> +57 310 357 951/a></li>
-          <li><a href="#"><i class="fa fa-envelope"></i> info@ieelseteadero.edu.co</a></li>
-          <li><a href="#"><i class="fa fa-clock"></i> Lun–Vie: 7AM – 6PM</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    © 2026 <span>I.E. El Sesteadero</span>. Todos los derechos reservados. Diseñado con ♥ para la Educación.
-  </div>
-</footer>
+
+<INCLURE{fond=inclures/footer, env}></INCLURE>
 
 <!-- BACK TO TOP -->
 <a href="#" class="back-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></a>
 
-<script>
-  // Hamburger menu
-  const ham = document.getElementById('hamburger');
-  const navLinks = document.getElementById('navLinks');
-  ham.addEventListener('click', () => navLinks.classList.toggle('open'));
 
-  // Close on link click
-  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+<script src="squelettes/js/paratodo.js"></script>
 
-  // Smooth active nav
-  const sections = document.querySelectorAll('section[id], div[id]');
-  const links = document.querySelectorAll('.nav-links a');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
-    links.forEach(l => { l.classList.remove('active'); if (l.getAttribute('href') === '#' + current) l.classList.add('active'); });
-  });
-
-  // Back to top visibility
-  const backTop = document.querySelector('.back-top');
-  window.addEventListener('scroll', () => {
-    backTop.style.opacity = window.scrollY > 300 ? '1' : '0';
-    backTop.style.pointerEvents = window.scrollY > 300 ? 'auto' : 'none';
-  });
-  backTop.style.opacity = '0';
-</script>
 </body>
 </html>
