@@ -54,6 +54,57 @@
 </div>
  -->
 
+<BOUCLE_seccion_about(RUBRIQUES) {id_rubrique=2}>
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      
+      <!-- Imágenes de la Rubrique 2 -->
+      <div class="about-imgs">
+        <!-- Imagen Principal (Primera imagen de la rubrique) -->
+        <BOUCLE_img_main(DOCUMENTS) {id_rubrique} {extension IN jpg,png,gif,webp} {0,1}>
+        <div class="img-main">
+          <img src="#URL_DOCUMENT" alt="[(#TITRE|attribut_html|sinon{#_seccion_about:TITRE|attribut_html})]" />
+        </div>
+        </BOUCLE_img_main>
+
+        <!-- Imagen Secundaria (Segunda imagen de la rubrique) -->
+        <BOUCLE_img_small(DOCUMENTS) {id_rubrique} {extension IN jpg,png,gif,webp} {1,1}>
+        <div class="img-small">
+          <img src="#URL_DOCUMENT" alt="[(#TITRE|attribut_html|sinon{#_seccion_about:TITRE|attribut_html})]" />
+        </div>
+        </BOUCLE_img_small>
+      </div>
+
+      <!-- Contenido de la Rubrique 2 -->
+      <div class="about-content">
+        <p class="section-label">Acerca de</p>
+        <h2 class="section-title">[(#TITRE|supprimer_numero)]</h2>
+        <div class="divider"></div>
+        
+        [<p style="font-size:.88rem;color:var(--text-light);line-height:1.8;margin-bottom:24px;">
+          (#DESCRIPTIF)
+        </p>]
+
+        <!-- Artículos de la Rubrique 2 (Máximo 3) -->
+        <BOUCLE_features(ARTICLES) {id_rubrique} {par num titre, date} {0,3}>
+        <div class="about-feature">
+          <div class="icon-box">
+            <i class="fa [(#SURTITRE|sinon{fa-award})]"></i>
+          </div>
+          <div>
+            <h4>[(#TITRE|supprimer_numero)]</h4>
+            [<p>(#DESCRIPTIF|sinon{#TEXTE|couper{150}})</p>]
+          </div>
+        </div>
+        </BOUCLE_features>
+
+      </div>
+    </div>
+  </div>
+</section>
+</BOUCLE_seccion_about>
+
 
 <!-- ABOUT -->
 <section class="about" id="about">
