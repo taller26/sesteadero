@@ -106,69 +106,50 @@
 
 
 
-<!-- COURSES -->
+<!-- 10 caminos -->
+<BOUCLE_seccion_courses(RUBRIQUES) {id_rubrique=2}>
 <section class="courses" id="courses">
   <div class="container">
     <div class="courses-header">
       <div>
-        <p class="section-label">Nuestro caminos</p>
-        <h2 class="section-title">10 caminos <em>pedagógicos</em></h2>
+        <p class="section-label">Nuestros caminos</p>
+        <h2 class="section-title">[(#TITRE|supprimer_numero)]</h2>
         <div class="divider"></div>
       </div>
-      <a href="#" class="btn-primary">Ver todos los caminos</a>
+      <a href="#URL_RUBRIQUE" class="btn-primary">Ver todos los caminos</a>
     </div>
+
     <div class="courses-grid">
 
+      <!-- Bucle de 3 artículos aleatorios de la Rubrique 2 -->
+      <BOUCLE_articulos_random(ARTICLES) {id_rubrique} {par hasard} {0,3}>
       <div class="course-card">
         <div class="thumb">
-          <img src="squelettes/imagenes/03.jpg" alt="Accounting"/>
-          <span class="category">Ecología</span>
+          
+          <!-- Intenta extraer el documento de imagen del artículo -->
+          <BOUCLE_imagen_doc(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {0,1}>
+          <img src="[(#FICHIER|image_reduire{500,0}|extraire_attribut{src})]" alt="[(#TITRE|attribut_html|sinon{#_articulos_random:TITRE|attribut_html})]" />
+          </BOUCLE_imagen_doc>
+          
+          <!-- Alternativa: Si no hay documento adjunto, usa el Logo del artículo -->
+          [<img src="(#LOGO_ARTICLE|image_reduire{500,0}|extraire_attribut{src})" alt="[(#TITRE|attribut_html)]" />]
+          <//B_imagen_doc>
+
+          [<span class="category">(#SOUSTITRE)</span>]
         </div>
+
         <div class="body">
-         
-       
-          <h4>Camino 1</h4>
-          <div class="course-footer">
-            
-          </div>
+          <h4><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h4>
+          <div class="course-footer"></div>
         </div>
       </div>
-
-      <div class="course-card">
-        <div class="thumb">
-          <img src="squelettes/imagenes/04.jpg" alt="Counseling"/>
-          <span class="category">Buen vivir</span>
-        </div>
-        <div class="body">
-      
-       
-          <h4>Camino 2</h4>
-          <div class="course-footer">
-          
-          </div>
-        </div>
-      </div>
-
-      <div class="course-card">
-        <div class="thumb">
-          <img src="squelettes/imagenes/05.jpg" alt="Health"/>
-          <span class="category">Salud</span>
-        </div>
-        <div class="body">
-       
-          
-          <h4>Camino 5</h4>
-          <div class="course-footer">
-          
-          </div>
-        </div>
-      </div>
-
-   
+      </BOUCLE_articulos_random>
 
     </div>
   </div>
 </section>
+</BOUCLE_seccion_courses>
+
 
 <!-- VIDEO SECTION -->
 <div class="video-section">
