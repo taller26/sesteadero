@@ -152,67 +152,101 @@
 
 
 
+<BOUCLE_ultimo_video(ARTICLES) {id_rubrique=5} {par date} {inverse} {0,1}>
 <section class="video-section">
-
     <div class="video-container">
-
         <!-- COLUMNA IZQUIERDA -->
         <div class="video-left">
-
             <p class="section-label">
                 Nuestros videos
             </p>
-
             <h2 class="section-title">
                 Mira el último video<br>
-                <em>realizado por grado 10°</em>
+                <em>[(#TITRE|supprimer_numero|textebrut)]</em>
             </h2>
-
             <div class="divider"></div>
 
-            <p class="video-description">
-                Morbi nec laoreet leo. Sed iaculis tincidunt massa,
-                at varius arcu faucibus quis. Mauris urna metus,
-                porttitor vitae eleifend ut, dapibus vitae tortor.
-            </p>
+            [<p class="video-description">
+                (#DESCRIPTIF|textebrut)
+            </p>]
 
-            <a href="#" class="btn-primary">
+            <a href="#URL_RUBRIQUE{5}" class="btn-primary">
                 Ver todas las producciones
             </a>
 
         </div>
 
-
         <!-- COLUMNA DERECHA -->
         <div class="video-right">
 
-            <div class="video-wrapper">
+            <!-- Extrae y limpia el ID de YouTube -->
+            [(#SET{yt_paso1, #SURTITRE|explode{'v='}|end})]
+            [(#SET{yt_paso2, #GET{yt_paso1}|explode{'/'}|end})]
+            [(#SET{yt_id,    #GET{yt_paso2}|explode{'?'}|reset|explode{'&'}|reset})]
 
+            <!-- Contenedor con enlace directo al artículo -->
+            <a href="#URL_ARTICLE" class="video-wrapper" title="[(#TITRE|attribut_html)]">
                 <img
-                    src="squelettes/imagenes/06.jpg"
-                    alt="Video realizado por estudiantes"
+                    src="https://img.youtube.com/vi/#GET{yt_id}/maxresdefault.jpg"
+                    alt="[(#TITRE|attribut_html)]"
                 >
-
                 <div class="play-btn">
                     <i class="fa fa-play"></i>
                 </div>
-
-            </div>
+            </a>
 
         </div>
 
     </div>
-
 </section>
+</BOUCLE_ultimo_video>
 
 
-
-<!-- TEACHERS -->
+<BOUCLE_seccion_aves(RUBRIQUES) {id_rubrique=4}>
+<!-- AVES -->
 <section class="teachers" id="teachers">
   <div class="container">
     <div class="text-center">
-      <p class="section-label">Nuestro equipo</p>
-      <h2 class="section-title">Conoce nuestro equipo <em>de trabajo</em></h2>
+      <p class="section-label">[(#TITRE|supprimer_numero|textebrute)]</p>
+      <h2 class="section-title">Conoce la avifauna <em>del Sesteadero</em></h2>
+      <div class="divider center"></div>
+      [<p class="section-sub">(#DESCRIPTIF|textebrute)</p>]
+    </div>
+
+    <div class="teachers-grid">
+      
+      <!-- Bucle de los últimos 4 artículos de la Sección 4 -->
+      <BOUCLE_articulos_aves(ARTICLES) {id_rubrique} {par date} {inverse} {0,4}>
+      <a href="#URL_ARTICLE" class="teacher-card">
+        <div class="photo">
+          
+          <!-- Documento de imagen adjunto al artículo -->
+          <BOUCLE_img_ave(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {0,1}>
+          <img src="[(#FICHIER|image_reduire{400,0}|extraire_attribut{src})]" alt="[(#TITRE|attribut_html|sinon{#_articulos_aves:TITRE|attribut_html})]" />
+          </BOUCLE_img_ave>
+          
+          <!-- Alternativa: Si no hay documento, usa el Logo del artículo -->
+          [<img src="(#LOGO_ARTICLE|image_reduire{400,0}|extraire_attribut{src})" alt="[(#TITRE|attribut_html)]" />]
+          <//B_img_ave>
+
+        </div>
+        <h4>[(#TITRE|supprimer_numero|textebrute)]</h4>
+        [<div class="role">(#SURTITRE|textebrute)</div>]
+      </a>
+      </BOUCLE_articulos_aves>
+
+    </div>
+  </div>
+</section>
+</BOUCLE_seccion_aves>
+
+
+<!-- AVES -->
+<section class="teachers" id="teachers">
+  <div class="container">
+    <div class="text-center">
+      <p class="section-label">Avifauna</p>
+      <h2 class="section-title">Conoce la  avifauna <em>del Sesteadero</em></h2>
       <div class="divider center"></div>
       <p class="section-sub">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eu sapien eget neque sollicitudin consequat eu ut eros. Vestibulum quis felis turpis.</p>
     </div>
@@ -252,7 +286,7 @@
 <section class="gallery">
   <div class="container">
     <div class="text-center">
-      <p class="section-label">Our Gallery</p>
+      <p class="section-label">Nuestras galerías</p>
       <h2 class="section-title">Our Photo <em>Gallery</em></h2>
       <div class="divider center"></div>
     </div>
