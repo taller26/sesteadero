@@ -381,62 +381,53 @@
 </div>
 
 
-
+<BOUCLE_seccion_blog(RUBRIQUES) {id_rubrique=6}>
 <!-- BLOG -->
 <section class="blog" id="blog">
   <div class="container">
     <div class="text-center">
-      <p class="section-label">Noticias</p>
-      <h2 class="section-title">Últimas noticias</h2>
+      <p class="section-label">[(#TITRE|supprimer_numero|textebrut)]</p>
+      <h2 class="section-title">Últimas [(#TITRE|supprimer_numero|textebrut)]</h2>
       <div class="divider center"></div>
     </div>
     <div class="blog-grid">
+      
+      <!-- Bucle de los últimos 3 artículos de la Sección 6 -->
+      <BOUCLE_articulos_blog(ARTICLES) {id_rubrique} {par date} {inverse} {0,3}>
       <div class="blog-card">
         <div class="thumb">
-          <img src="squelettes/imagenes/03.jpg" alt="Blog"/>
+          
+          <!-- Únicamente muestra imagen si el artículo tiene un documento adjunto -->
+          <BOUCLE_img_art2(DOCUMENTS) {id_article} {media=image} {0,1}>
+          <img src="[(#FICHIER|image_reduire{400,0}|extraire_attribut{src})]" alt="[(#_articulos_blog:TITRE|attribut_html)]" />
+          </BOUCLE_img_art2>
+
         </div>
         <div class="body">
           <div class="blog-meta">
-            <span><i class="fa fa-calendar"></i> Junio 5, 2026</span>
-            <span><i class="fa fa-tag"></i> Educación propia</span>
+            <!-- Palabras clave (Mots-clés) asociadas al artículo -->
+            <BOUCLE_mots_art(MOTS) {id_article}>
+            <span><i class="fa fa-tag"></i> [(#TITRE|textebrut)]</span>
+            </BOUCLE_mots_art>
           </div>
-          <h4><a href="#">Noticia 1</a></h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eu sapien eget neque sollicitudin consequat eu ut eros.</p>
-          <a href="#" class="read-more">Leer noticia completa <i class="fa fa-arrow-right"></i></a>
+          
+          <h4>
+            <a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|textebrut|couper{80})]</a>
+          </h4>
+
+          [<p>(#DESCRIPTIF|textebrut|couper{150})</p>]
+
+          <a href="#URL_ARTICLE" class="read-more">
+            Leer noticia completa <i class="fa fa-arrow-right"></i>
+          </a>
         </div>
       </div>
-      <div class="blog-card">
-        <div class="thumb">
-          <img src="squelettes/imagenes/05.jpg" alt="Blog"/>
-        </div>
-        <div class="body">
-          <div class="blog-meta">
-            <span><i class="fa fa-calendar"></i> Mayo 28, 2026</span>
-            <span><i class="fa fa-tag"></i> Technología</span>
-          </div>
-          <h4><a href="#">Noticia 2</a></h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eu sapien eget neque sollicitudin consequat eu ut eros.</p>
-          <a href="#" class="read-more">Leer noticia completa <i class="fa fa-arrow-right"></i></a>
-        </div>
-      </div>
-      <div class="blog-card">
-        <div class="thumb">
-          <img src="squelettes/imagenes/08.jpg" alt="Blog"/>
-        </div>
-        <div class="body">
-          <div class="blog-meta">
-            <span><i class="fa fa-calendar"></i> Mayo 14, 2026</span>
-            <span><i class="fa fa-tag"></i> Avifauna</span>
-          </div>
-          <h4><a href="#">Noticia 3</a></h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eu sapien eget neque sollicitudin consequat eu ut eros.</p>
-          <a href="#" class="read-more">Leer noticia completa <i class="fa fa-arrow-right"></i></a>
-        </div>
-      </div>
+      </BOUCLE_articulos_blog>
+
     </div>
   </div>
 </section>
-
+</BOUCLE_seccion_blog>
 
 
 <!-- FOOTER -->
