@@ -207,10 +207,10 @@
 <section class="teachers" id="teachers">
   <div class="container">
     <div class="text-center">
-      <p class="section-label">[(#TITRE|supprimer_numero|textebrute)]</p>
+      <p class="section-label">[(#TITRE|supprimer_numero|textebrut)]</p>
       <h2 class="section-title">Conoce la avifauna <em>del Sesteadero</em></h2>
       <div class="divider center"></div>
-      [<p class="section-sub">(#DESCRIPTIF|textebrute)</p>]
+      [<p class="section-sub">(#DESCRIPTIF|textebrut)</p>]
     </div>
 
     <div class="teachers-grid">
@@ -230,8 +230,8 @@
           <//B_img_ave>
 
         </div>
-        <h4>[(#TITRE|supprimer_numero|textebrute)]</h4>
-        [<div class="role">(#SURTITRE|textebrute)</div>]
+        <h4>[(#TITRE|supprimer_numero|textebrut)]</h4>
+        [<div class="role">(#SURTITRE|textebrut)</div>]
       </a>
       </BOUCLE_articulos_aves>
 
@@ -241,11 +241,44 @@
 </BOUCLE_seccion_aves>
 
 
+<BOUCLE_seccion_galeria(RUBRIQUES) {id_rubrique=3}>
+<!-- GALLERY -->
+<section class="gallery">
+  <div class="container">
+    <div class="text-center">
+      <p class="section-label">[(#TITRE|supprimer_numero|textebrute)]</p>
+      <h2 class="section-title">Nuestras <em>Galerías de fotos</em></h2>
+      <a href="#URL_RUBRIQUE" class="btn-primary">
+        Ver todas las galerías
+      </a>
+      <div class="divider center"></div>
+    </div>
+
+    <div class="gallery-grid">
+      
+      <!-- Bucle de los últimos 6 artículos de la Sección 3 -->
+      <BOUCLE_galeria_articulos(ARTICLES) {id_rubrique} {par date} {inverse} {0,6}>
+      <a href="#URL_ARTICLE" class="g-item[ (#COMPTEUR_BOUCLE|=={1}|ou{#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}}|oui)wide]">
+        
+        <!-- Documento de imagen adjunto al artículo -->
+        <BOUCLE_img_art(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {0,1}>
+        <img src="[(#FICHIER|image_reduire{800,0}|extraire_attribut{src})]" alt="[(#_galeria_articulos:TITRE|attribut_html)]" />
+        </BOUCLE_img_art>
+
+        <!-- Alternativa: Si no hay documento adjunto, usa el Logo del artículo -->
+        [<img src="(#LOGO_ARTICLE|image_reduire{800,0}|extraire_attribut{src})" alt="[(#TITRE|attribut_html)]" />]
+        <//B_img_art>
+
+      </a>
+      </BOUCLE_galeria_articulos>
+
+    </div>
+  </div>
+</section>
+</BOUCLE_seccion_galeria>
 
 
-
-
-<!-- EVENTS -->
+<!-- EVENTS 
 <section class="events" id="events">
   <div class="container">
     <div class="text-center">
@@ -296,6 +329,7 @@
     </div>
   </div>
 </section>
+-->
 
 <!-- CONTACT SPLIT -->
 <div class="contact-split" id="contact">
