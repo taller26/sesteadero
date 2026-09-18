@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 }
 
 // Reemplazar por la dirección de correo que recibirá los mensajes
-$destino = "tu-correo@midominio.com"; 
+$destino = "tallerveintiseis@gmail.com"; 
 
 // Captura y saneamiento de datos
 $nombre   = trim($_POST['nombre'] ?? '');
