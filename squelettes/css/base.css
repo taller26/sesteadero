@@ -622,6 +622,7 @@
 
     /* Estilo para las opciones del desplegable */
 .form-group select option {
-  background-color: var(--navy); /* o #0f2b3d */
-  color: #ffffff;
+  background-color: var(--navy); /* Fondo oscuro consistente con el formulario */
+  color: var(--white);          /* Texto blanco legible */
+  padding: 10px;
 }
