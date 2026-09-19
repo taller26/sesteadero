@@ -1,0 +1,77 @@
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>#NOM_SITE_SPIP</title>
+
+<INCLURE{fond=inclures/cabeceraparatodos}{env} />
+
+
+
+</head>
+<body>
+
+<!-- TOPBAR -->
+<INCLURE{fond=inclures/topbar}{env} />
+
+<!-- NAVBAR -->
+<INCLURE{fond=inclures/navbar}{env} />
+
+
+
+<div class="page-hero">
+  <div>
+     <h1>#TITRE</h1>
+    <p style="max-width: 700px; margin: 15px auto; opacity: 0.9; font-size: 0.8rem;">
+      [(#DESCRIPTIF|textebrut)]   </p>
+     [(#TEXTE|replace{'<p', '<p style="text-align: justify;"'})]
+  </div>
+</div>
+
+<B_galeria_articulos>
+<section class="gallery">
+  <div class="container">
+    <div class="gallery-grid">
+      
+      <!-- Bucle que recorre todos los artículos de la sección -->
+      <BOUCLE_galeria_articulos(ARTICLES) {id_rubrique} {par date} {inverse}>
+      <!-- Bucle Galería -->
+      <a href="#URL_ARTICLE" class="g-item">
+        <div style="position: relative; height: 100%;">
+          
+          <!-- Busca la ÚLTIMA imagen subida al artículo ({par id_document}{inverse}{0,1}) -->
+          <BOUCLE_ultima_img(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {par id_document} {inverse} {0,1}>
+            <img src="[(#FICHIER|image_reduire{400,0}|extraire_attribut{src})]" alt="[(#_galeria_articulos:TITRE|attribut_html)]">
+          </BOUCLE_ultima_img>
+            <!-- Alternativa si el artículo no tiene documentos adjuntos: usa su Logo -->
+            [<img src="(#LOGO_ARTICLE|image_reduire{400,0}|extraire_attribut{src})" alt="[(#TITRE|attribut_html)]">]
+          <//B_ultima_img>
+
+          <div style="position: absolute; bottom: 0; background: rgba(15,43,61,0.8); width: 100%; padding: 10px; color: white; text-align: center; font-weight: 600; font-size: 0.9rem;">
+            [(#TITRE|supprimer_numero|supprimer_tags)]
+          </div>
+        </div>
+      </a>
+      <!-- Fin Bucle -->
+      </BOUCLE_galeria_articulos>
+
+    </div>
+  </div>
+</section>
+</B_galeria_articulos>
+
+<!-- FOOTER -->
+
+<INCLURE{fond=inclures/footer}{env} />
+
+<!-- BACK TO TOP -->
+<a href="#" class="back-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></a>
+
+
+<script src="[(#CHEMIN{js/paratodo.js})]"></script>
+
+</body>
+</html>
+</BOUCLE_principale>

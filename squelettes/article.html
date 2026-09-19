@@ -1,0 +1,65 @@
+<BOUCLE_principale(ARTICLES) {id_article}>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>#NOM_SITE_SPIP</title>
+
+<INCLURE{fond=inclures/cabeceraparatodos}{env} />
+
+
+
+</head>
+<body>
+
+<!-- TOPBAR -->
+<INCLURE{fond=inclures/topbar}{env} />
+
+<!-- NAVBAR -->
+<INCLURE{fond=inclures/navbar}{env} />
+
+
+
+<div class="page-hero">
+  <div>
+     <h1>#TITRE</h1>
+    <p style="max-width: 700px; margin: 15px auto; opacity: 0.9; font-size: 0.8rem;">
+      [(#DESCRIPTIF|textebrut)]   </p>
+     [(#TEXTE|replace{'<p', '<p style="text-align: justify;"'})]
+  </div>
+</div>
+
+<B_fotos>
+<section class="gallery">
+  <div class="container">
+    <div class="gallery-grid">
+      
+      <!-- Bucle que recorre las imágenes adjuntas al artículo -->
+      <BOUCLE_fotos(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {par num titre, id_document}>
+      <!-- Bucle de fotos de esta galería que abren en Lightbox -->
+      <a href="#URL_DOCUMENT" class="g-item" data-lightbox="galeria-[(#ID_ARTICLE)]">
+        <img src="[(#FICHIER|image_reduire{400,0}|extraire_attribut{src})]" alt="[(#TITRE|sinon{#_principal:TITRE}|supprimer_tags|attribut_html)]">
+      </a>
+      <!-- Fin Bucle -->
+      </BOUCLE_fotos>
+
+    </div>
+  </div>
+</section>
+</B_fotos>
+
+
+<!-- FOOTER -->
+
+<INCLURE{fond=inclures/footer}{env} />
+
+<!-- BACK TO TOP -->
+<a href="#" class="back-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></a>
+
+
+<script src="[(#CHEMIN{js/paratodo.js})]"></script>
+
+</body>
+</html>
+</BOUCLE_principale>
