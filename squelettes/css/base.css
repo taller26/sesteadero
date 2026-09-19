@@ -626,3 +626,69 @@
   color: var(--white);          /* Texto blanco legible */
   padding: 10px;
 }
+
+/* =========================================
+   ESTILOS ADICIONALES PARA NUEVAS PÁGINAS
+   ========================================= */
+
+/* Listado de Caminos Pedagógicos */
+.caminos-list { display: flex; flex-direction: column; gap: 40px; padding: 60px 20px; max-width: 1000px; margin: 0 auto; }
+.camino-item { display: flex; gap: 30px; background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,.05); align-items: center; }
+.camino-item img { width: 45%; height: 280px; object-fit: cover; }
+.camino-item-content { padding: 30px; width: 55%; }
+.camino-item-content h3 { font-size: 1.5rem; font-weight: 800; color: var(--teal); margin-bottom: 15px; }
+.camino-item-content p { font-size: .9rem; color: var(--text-light); line-height: 1.7; margin-bottom: 20px; }
+
+/* Archivos Adjuntos y Reproductor */
+.attachments-list { display: flex; flex-direction: column; gap: 10px; margin: 25px 0; }
+.attachments-list a { display: inline-flex; align-items: center; gap: 10px; padding: 12px 18px; background: var(--light-bg); border-left: 3px solid var(--orange); color: var(--teal); font-size: .85rem; font-weight: 600; border-radius: 4px; transition: var(--transition); }
+.attachments-list a:hover { background: #eef2f6; color: var(--orange); }
+.audio-player { margin: 20px 0; width: 100%; border-radius: 50px; }
+
+/* Paginación */
+.pagination { display: flex; justify-content: center; gap: 10px; margin-top: 50px; }
+.pagination a, .pagination span { width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: var(--white); color: var(--teal); font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,.05); transition: var(--transition); }
+.pagination a:hover, .pagination span.active { background: var(--orange); color: var(--white); }
+
+/* Mini Galería (Lightbox) */
+.mini-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin: 25px 0; }
+.mini-gallery a { border-radius: 8px; overflow: hidden; display: block; height: 110px; }
+.mini-gallery img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+.mini-gallery a:hover img { transform: scale(1.1); }
+
+/* Grid de Videos (Producciones) */
+.videos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 30px; padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
+
+@media (max-width: 768px) { 
+  .camino-item { flex-direction: column; } 
+  .camino-item img, .camino-item-content { width: 100%; }
+}
+
+/* =========================================
+   ESTILOS PARA EL PAGE-HERO
+   ========================================= */
+.page-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 80px 20px; /* Da espacio arriba y abajo */
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--light-bg); /* O el color de fondo que prefieras */
+  margin-bottom: 40px;
+}
+
+/* Controla el div interno para que el texto no vaya de lado a lado */
+.page-hero > div {
+  max-width: 800px; 
+  margin: 0 auto;
+  width: 100%;
+}
+
+.page-hero h1 {
+  font-size: 2.5rem;
+  color: var(--teal);
+  margin-bottom: 15px;
+}

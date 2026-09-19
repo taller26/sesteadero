@@ -1,0 +1,56 @@
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}><!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>#NOM_SITE_SPIP</title>
+
+<INCLURE{fond=inclures/cabeceraparatodos, env}>
+
+
+
+</head>
+<body>
+
+<!-- TOPBAR -->
+<INCLURE{fond=inclures/topbar, env}></INCLURE>
+
+<!-- NAVBAR -->
+<INCLURE{fond=inclures/navbar, env}></INCLURE>
+
+
+<div class="page-hero">
+  <div>
+    <h1>10 Caminos Pedagógicos  sdfasfasdfasd</h1>
+    <p style="max-width: 700px; margin: 0 auto; opacity: 0.9; font-size: 0.95rem;">
+      Conoce nuestra propuesta educativa estructurada a través de los caminos pedagógicos que guían el aprendizaje integral en nuestro territorio.
+    </p>
+  </div>
+</div>
+
+<section class="caminos-list">
+  <!-- Bucle Camino -->
+  <div class="camino-item">
+    <img src="ruta/a/tu/foto1.jpg" alt="Camino 1">
+    <div class="camino-item-content">
+      <h3>Título del Camino 1</h3>
+      <p>Texto descriptivo corto que introduce el enfoque de este camino pedagógico específico dentro de la institución. Aquí se explica brevemente la metodología.</p>
+      <a href="link-al-articulo.html" class="btn-primary">Leer más <i class="fa fa-arrow-right"></i></a>
+    </div>
+  </div>
+  <!-- Fin Bucle -->
+</section>
+
+<!-- FOOTER -->
+
+<INCLURE{fond=inclures/footer, env}></INCLURE>
+
+<!-- BACK TO TOP -->
+<a href="#" class="back-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></a>
+
+
+<script src="squelettes/js/paratodo.js"></script>
+
+</body>
+</html>
+</BOUCLE_principale>

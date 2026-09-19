@@ -1,0 +1,73 @@
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>#NOM_SITE_SPIP</title>
+
+<INCLURE{fond=inclures/cabeceraparatodos}{env} />
+
+
+
+</head>
+<body>
+
+<!-- TOPBAR -->
+<INCLURE{fond=inclures/topbar}{env} />
+
+<!-- NAVBAR -->
+<INCLURE{fond=inclures/navbar}{env} />
+
+
+<div class="page-hero">
+  <div>
+    <h1>#TITRE</h1>
+    <p style="max-width: 700px; margin: 15px auto; opacity: 0.9; font-size: 0.8rem;">
+      [(#DESCRIPTIF|textebrut)]   </p>
+     [(#TEXTE|replace{'<p', '<p style="text-align: justify;"'})]
+    </div>
+</div>
+
+<section class="caminos-list">
+  <!-- Bucle Camino -->
+<B_caminos>
+  <BOUCLE_caminos(ARTICLES) {id_rubrique} {par num titre, titre}>
+  <!-- Bucle Camino -->
+  <div class="camino-item">
+    
+    <!-- Imagen destacada (documento adjunto o logo del artículo) -->
+    <BOUCLE_img(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {0,1}>
+      <img src="[(#FICHIER|image_reduire{600,0}|extraire_attribut{src})]" alt="[(#_caminos:TITRE|attribut_html)]">
+    </BOUCLE_img>
+      [<img src="(#LOGO_ARTICLE|image_reduire{600,0}|extraire_attribut{src})" alt="[(#TITRE|attribut_html)]">]
+    <//B_img>
+
+    <div class="camino-item-content">
+      <h3>[(#TITRE|supprimer_numero)]</h3>
+      
+      <!-- Descripción corta en texto plano sin etiquetas HTML -->
+      <p>[(#DESCRIPTIF|sinon{#TEXTE}|couper{200}|supprimer_tags)]</p>
+
+      <a href="#URL_ARTICLE" class="btn-primary">Leer más <i class="fa fa-arrow-right"></i></a>
+    </div>
+  </div>
+  <!-- Fin Bucle -->
+  </BOUCLE_caminos>
+  </B_caminos>
+  <!-- Fin Bucle -->
+</section>
+
+<!-- FOOTER -->
+
+<INCLURE{fond=inclures/footer}{env} />
+
+<!-- BACK TO TOP -->
+<a href="#" class="back-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></a>
+
+
+<script src="[(#CHEMIN{js/paratodo.js})]"></script>
+
+</body>
+</html>
+</BOUCLE_principale>
