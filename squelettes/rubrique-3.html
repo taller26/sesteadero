@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>#NOM_SITE_SPIP</title>
 
-<INCLURE{fond=inclures/cabeceraparatodos, env}>
+<INCLURE{fond=inclures/cabeceraparatodos}{env} />
 
 
 
@@ -14,43 +14,56 @@
 <body>
 
 <!-- TOPBAR -->
-<INCLURE{fond=inclures/topbar, env}></INCLURE>
+<INCLURE{fond=inclures/topbar}{env} />
 
 <!-- NAVBAR -->
-<INCLURE{fond=inclures/navbar, env}></INCLURE>
+<INCLURE{fond=inclures/navbar}{env} />
 
- 
+
+
 <div class="page-hero">
   <div>
-    <h1>1333333333333333</h1>
-    <p style="max-width: 700px; margin: 0 auto; opacity: 0.9; font-size: 0.95rem;">
-      Conoce nuestra propuesta educativa estructurada a través de los caminos pedagógicos que guían el aprendizaje integral en nuestro territorio.
-    </p>
+     <h1>#TITRE</h1>
+    <p style="max-width: 700px; margin: 15px auto; opacity: 0.9; font-size: 0.8rem;">
+      [(#DESCRIPTIF|textebrut)]   </p>
+     [(#TEXTE|replace{'<p', '<p style="text-align: justify;"'})]
   </div>
 </div>
 
-<section class="caminos-list">
-  <!-- Bucle Camino -->
-  <div class="camino-item">
-    <img src="ruta/a/tu/foto1.jpg" alt="Camino 1">
-    <div class="camino-item-content">
-      <h3>Título del Camino 1</h3>
-      <p>Texto descriptivo corto que introduce el enfoque de este camino pedagógico específico dentro de la institución. Aquí se explica brevemente la metodología.</p>
-      <a href="link-al-articulo.html" class="btn-primary">Leer más <i class="fa fa-arrow-right"></i></a>
+<B_galeria_articulos>
+<section class="gallery">
+  <div class="container">
+    <div class="gallery-grid">
+      
+      <BOUCLE_galeria_articulos(ARTICLES) {id_rubrique} {par date} {inverse}>
+      <a href="#URL_ARTICLE" class="g-item">
+        
+        <BOUCLE_ultima_img(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {par id_document} {inverse} {0,1}>
+          <img src="[(#FICHIER|image_reduire{500,0}|extraire_attribut{src})]" alt="[(#_galeria_articulos:TITRE|attribut_html)]">
+        </BOUCLE_ultima_img>
+          [<img src="(#LOGO_ARTICLE|image_reduire{500,0}|extraire_attribut{src})" alt="[(#TITRE|attribut_html)]">]
+        <//B_ultima_img>
+
+        <div class="g-item-title">
+          [(#TITRE|supprimer_numero|supprimer_tags)]
+        </div>
+      </a>
+      </BOUCLE_galeria_articulos>
+
     </div>
   </div>
-  <!-- Fin Bucle -->
 </section>
+</B_galeria_articulos>
 
 <!-- FOOTER -->
 
-<INCLURE{fond=inclures/footer, env}></INCLURE>
+<INCLURE{fond=inclures/footer}{env} />
 
 <!-- BACK TO TOP -->
 <a href="#" class="back-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></a>
 
 
-<script src="squelettes/js/paratodo.js"></script>
+<INCLURE{fond=inclures/jotaeses}{env} />
 
 </body>
 </html>

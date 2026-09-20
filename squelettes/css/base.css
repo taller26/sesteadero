@@ -120,7 +120,7 @@
     .stat-text p { font-size: .77rem; color: var(--text-light); font-weight: 400; }
 
     /* ─── SECTION DEFAULTS ───────────────────────── */
-    section { padding: 70px 20px; }
+    section { padding: 15px 20px; }
     .section-label {
       font-size: .75rem; font-weight: 700; color: var(--orange);
       letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px;
@@ -673,11 +673,11 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 80px 20px; /* Da espacio arriba y abajo */
+  padding: 20px 20px; /* Da espacio arriba y abajo */
   width: 100%;
   box-sizing: border-box;
   background-color: var(--light-bg); /* O el color de fondo que prefieras */
-  margin-bottom: 40px;
+  margin-bottom: 10px;
 }
 
 /* Controla el div interno para que el texto no vaya de lado a lado */
@@ -691,4 +691,62 @@
   font-size: 2.5rem;
   color: var(--teal);
   margin-bottom: 15px;
+}
+
+
+/* ─── GALLERY ─────────────────────────────────── */
+.gallery {
+  background: var(--white);
+  padding: 10px 20px 30px 10px;
+  width: 100%;
+}
+
+.gallery-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)) !important;
+  gap: 20px !important;
+  width: 100%;
+}
+
+.g-item {
+  display: block !important;
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: 4 / 3 !important; /* Mantiene la proporción y permite que la grilla cree filas automáticas */
+  border-radius: var(--radius) !important;
+  overflow: hidden !important; /* Evita cualquier desbordamiento de la imagen */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: var(--transition);
+}
+
+.g-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.g-item img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
+  transition: var(--transition);
+}
+
+.g-item:hover img {
+  transform: scale(1.06);
+}
+
+.g-item-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(15, 43, 61, 0.85);
+  backdrop-filter: blur(2px);
+  padding: 10px;
+  color: var(--white);
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.88rem;
+  z-index: 2;
 }

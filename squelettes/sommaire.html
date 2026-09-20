@@ -242,9 +242,9 @@
 
 
 <BOUCLE_seccion_galeria(RUBRIQUES) {id_rubrique=3}>
-<!-- GALLERY -->
 <section class="gallery">
   <div class="container">
+    
     <div class="text-center">
       <p class="section-label">[(#TITRE|supprimer_numero|textebrut)]</p>
       <h2 class="section-title">Nuestras <em>Galerías de fotos</em></h2>
@@ -256,23 +256,26 @@
 
     <div class="gallery-grid">
       
-      <!-- Bucle de los últimos 6 artículos de la Sección 3 -->
       <BOUCLE_galeria_articulos(ARTICLES) {id_rubrique} {par date} {inverse} {0,6}>
-      <a href="#URL_ARTICLE" class="g-item[ (#COMPTEUR_BOUCLE|=={1}|ou{#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}}|oui)wide]">
+      <a href="#URL_ARTICLE" class="g-item">
         
-        <!-- Documento de imagen adjunto al artículo -->
-        <BOUCLE_img_art(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {0,1}>
-        <img src="[(#FICHIER|image_reduire{800,0}|extraire_attribut{src})]" alt="[(#_galeria_articulos:TITRE|attribut_html)]" />
+        <BOUCLE_img_art(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {par id_document} {inverse} {0,1}>
+          <img src="[(#FICHIER|image_reduire{800,0}|extraire_attribut{src})]" alt="[(#_galeria_articulos:TITRE|attribut_html)]" />
         </BOUCLE_img_art>
 
-        <!-- Alternativa: Si no hay documento adjunto, usa el Logo del artículo -->
         [<img src="(#LOGO_ARTICLE|image_reduire{800,0}|extraire_attribut{src})" alt="[(#TITRE|attribut_html)]" />]
         <//B_img_art>
+
+        <div class="g-item-title">
+          [(#TITRE|supprimer_numero|supprimer_tags)]
+        </div>
 
       </a>
       </BOUCLE_galeria_articulos>
 
     </div>
+  
+
   </div>
 </section>
 </BOUCLE_seccion_galeria>
@@ -459,7 +462,7 @@
 <a href="#" class="back-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></a>
 
 
-<script src="squelettes/js/paratodo.js"></script>
+
 
 </body>
 </html>

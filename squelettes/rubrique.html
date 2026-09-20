@@ -13,10 +13,10 @@
 <body>
 
 <!-- TOPBAR -->
-<INCLURE{fond=inclures/topbar, env}></INCLURE>
+ <INCLURE{fond=inclures/topbar}{env} />
 
 <!-- NAVBAR -->
-<INCLURE{fond=inclures/navbar, env}></INCLURE>
+  <INCLURE{fond=inclures/navbar}{env} />
 
 
 <div class="page-hero">
@@ -42,14 +42,14 @@
 </section>
 
 <!-- FOOTER -->
+<INCLURE{fond=inclures/footer}{env} />
 
-<INCLURE{fond=inclures/footer, env}></INCLURE>
 
 <!-- BACK TO TOP -->
 <a href="#" class="back-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></a>
 
 
-<script src="squelettes/js/paratodo.js"></script>
+<INCLURE{fond=inclures/jotaeses}{env} />
 
 </body>
 </html>

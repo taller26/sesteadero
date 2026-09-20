@@ -23,7 +23,7 @@
 
 <div class="page-hero">
   <div>
-     <h1>#TITRE</h1>
+     <h1>#TITRE ddf</h1>
     <p style="max-width: 700px; margin: 15px auto; opacity: 0.9; font-size: 0.8rem;">
       [(#DESCRIPTIF|textebrut)]   </p>
      [(#TEXTE|replace{'<p', '<p style="text-align: justify;"'})]
@@ -70,7 +70,7 @@
 <a href="#" class="back-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></a>
 
 
-<script src="[(#CHEMIN{js/paratodo.js})]"></script>
+<INCLURE{fond=inclures/jotaeses}{env} />
 
 </body>
 </html>
