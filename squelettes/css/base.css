@@ -858,3 +858,59 @@
   .albums-grid { grid-template-columns: 1fr; }
   .mini-gallery { grid-template-columns: repeat(2, 1fr); }
 }
+
+
+/* =========================================
+   PAGINACIÓN NATIVA DE SPIP
+   ========================================= */
+.pagination { 
+  display: block; /* Quitamos el flex del contenedor principal para no afectar el ancla de SPIP */
+  margin-top: 50px; 
+  text-align: center;
+}
+
+.pagination ul.pagination-items {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  list-style: none; /* Elimina los puntos de viñeta */
+  padding: 0;
+  margin: 0;
+}
+
+.pagination li.pagination-item {
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilos de los "botones" (enlaces y página activa) */
+.pagination .pagination-item a, 
+.pagination .pagination-item span.on {
+  width: 42px; 
+  height: 42px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  border-radius: 8px; 
+  background: var(--white); 
+  color: var(--teal); 
+  font-weight: 600; 
+  box-shadow: 0 2px 8px rgba(0,0,0,.05); 
+  transition: var(--transition);
+  text-decoration: none; /* Quita el subrayado de los links */
+}
+
+/* Hover y Estado Activo */
+.pagination .pagination-item a:hover, 
+.pagination .pagination-item span.on { 
+  background: var(--orange); 
+  color: var(--white); 
+}
+
+/* Ocultar el ancla invisible de SPIP que no necesita estilos */
+.pagination_ancre {
+  display: none;
+}
+.blog {
+  min-height: 60vh; /* Asegura que la sección ocupe al menos el 60% del alto de la pantalla */
+}

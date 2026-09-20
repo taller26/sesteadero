@@ -147,6 +147,8 @@
     });
   })();
 
+
+  /*
   // ============================================================
   // PAGINACIÓN — usada en Noticias o actividades (de 5 en 5).
   // Se activa solo si la página tiene #paginatedGrid + #pagination.
@@ -187,6 +189,8 @@
 
     showPage(1, false);
   })();
+
+*/
 
   // El formulario de contacto solo existe en el home; esta comprobación
   // evita un error en las páginas nuevas donde se retiró esa sección.

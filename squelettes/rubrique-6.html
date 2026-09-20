@@ -1,0 +1,129 @@
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>#NOM_SITE_SPIP</title>
+
+<INCLURE{fond=inclures/cabeceraparatodos}{env} />
+
+
+
+</head>
+<body>
+
+<!-- TOPBAR -->
+<INCLURE{fond=inclures/topbar}{env} />
+
+<!-- NAVBAR -->
+<INCLURE{fond=inclures/navbar}{env} />
+
+
+
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="inner">
+    <h1> <em>#TITRE</em></h1>
+    #DESCRIPTIF
+
+
+    
+    <div class="breadcrumb">
+  <!-- Enlace al inicio del sitio -->
+  <a href="#URL_SITE_SPIP">Inicio</a>
+
+  <!-- Recorre las secciones padre si existen -->
+  <BOUCLE_ariane(HIERARCHIE) {id_rubrique}>
+    <span class="sep"><i class="fa fa-angle-double-right"></i></span>
+    <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+  </BOUCLE_ariane>
+
+  <!-- Sección actual -->
+  <span class="sep"><i class="fa fa-angle-double-right"></i></span>
+  <span class="current">[(#TITRE|supprimer_numero)]</span>
+</div>
+
+
+  </div>
+</div>
+
+<!-- LISTADO DE NOTICIAS -->
+
+
+<section class="blog">
+  <div class="container">
+
+    <!-- APERTURA DEL BLOQUE CONDICIONAL DEL BUCLE (Obligatorio para paginación) -->
+    <B_articulos_blog>
+    
+    <!-- Ancla para que al cambiar de página la vista suba hasta aquí -->
+    #ANCRE_PAGINATION
+    
+    <div class="blog-grid" id="paginatedGrid">
+
+      <BOUCLE_articulos_blog(ARTICLES) {id_rubrique} {par date} {inverse} {pagination 6}>
+
+      
+      <div class="blog-card">
+        
+        <!-- Imagen -->
+        <div class="thumb">
+          <a href="#URL_ARTICLE">
+            <BOUCLE_img_blog(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {par id_document} {inverse} {0,1}>
+              <img src="[(#FICHIER|image_reduire{400,0}|image_recadre{384,200,center}|extraire_attribut{src})]" alt="[(#_articulos_blog:TITRE|attribut_html)]" loading="lazy">
+            </BOUCLE_img_blog>
+              [<img src="(#LOGO_ARTICLE|image_reduire{400,0}|image_recadre{384,200,center}|extraire_attribut{src})" alt="[(#TITRE|attribut_html)]" loading="lazy">]
+            <//B_img_blog>
+          </a>
+        </div>
+        
+        <div class="body">
+          <B_tags>
+          <div class="blog-meta">
+            <span><i class="fa fa-tag"></i> 
+              <BOUCLE_tags(MOTS) {id_article}>
+                [(#TITRE|supprimer_numero)][(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|oui), ]
+              </BOUCLE_tags>
+            </span>
+          </div>
+          </B_tags>
+          
+          <h4><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero)]</a></h4>
+          <p>[(#DESCRIPTIF|sinon{#TEXTE}|supprimer_tags|couper{140})]</p>
+          <a href="#URL_ARTICLE" class="read-more">Leer noticia completa <i class="fa fa-arrow-right"></i></a>
+        </div>
+
+      </div>
+      </BOUCLE_articulos_blog>
+
+    </div>
+
+    <!-- Renderizado de la paginación -->
+    [<div class="pagination" id="pagination">
+      (#PAGINATION{page})
+    </div>]
+    
+    <!-- CIERRE DEL BLOQUE CONDICIONAL -->
+    </B_articulos_blog>
+
+  </div>
+</section>
+
+
+
+
+<!-- FOOTER -->
+
+<INCLURE{fond=inclures/footer}{env} />
+
+<!-- BACK TO TOP -->
+<a href="#" class="back-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></a>
+
+
+<INCLURE{fond=inclures/jotaeses}{env} />
+
+</body>
+</html>
+</BOUCLE_principale>

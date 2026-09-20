@@ -21,46 +21,66 @@
 
 
 
-<div class="page-hero">
-  <div>
-     <h1>#TITRE ddf</h1>
-    <p style="max-width: 700px; margin: 15px auto; opacity: 0.9; font-size: 0.8rem;">
-      [(#DESCRIPTIF|textebrut)]   </p>
-     [(#TEXTE|replace{'<p', '<p style="text-align: justify;"'})]
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="inner">
+    <h1>Conoce las <em>#TITRE</em> del Sesteadero</h1>
+     #DESCRIPTIF
+
+     
+    <div class="breadcrumb">
+  <!-- Enlace al inicio del sitio -->
+  <a href="#URL_SITE_SPIP">Inicio</a>
+
+  <!-- Recorre las secciones padre si existen -->
+  <BOUCLE_ariane(HIERARCHIE) {id_rubrique}>
+    <span class="sep"><i class="fa fa-angle-double-right"></i></span>
+    <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+  </BOUCLE_ariane>
+
+  <!-- Sección actual -->
+  <span class="sep"><i class="fa fa-angle-double-right"></i></span>
+  <span class="current">[(#TITRE|supprimer_numero)]</span>
+</div>
+
   </div>
 </div>
 
-<B_galeria_articulos>
-<section class="gallery">
+<!-- LISTADO DE AVES -->
+<section class="teachers">
   <div class="container">
-    <div class="gallery-grid">
-      
-      <!-- Bucle que recorre todos los artículos de la sección -->
-      <BOUCLE_galeria_articulos(ARTICLES) {id_rubrique} {par date} {inverse}>
-      <!-- Bucle Galería -->
-      <a href="#URL_ARTICLE" class="g-item">
-        <div style="position: relative; height: 100%;">
-          
-          <!-- Busca la ÚLTIMA imagen subida al artículo ({par id_document}{inverse}{0,1}) -->
-          <BOUCLE_ultima_img(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {par id_document} {inverse} {0,1}>
-            <img src="[(#FICHIER|image_reduire{400,0}|extraire_attribut{src})]" alt="[(#_galeria_articulos:TITRE|attribut_html)]">
-          </BOUCLE_ultima_img>
-            <!-- Alternativa si el artículo no tiene documentos adjuntos: usa su Logo -->
-            [<img src="(#LOGO_ARTICLE|image_reduire{400,0}|extraire_attribut{src})" alt="[(#TITRE|attribut_html)]">]
-          <//B_ultima_img>
+    <div class="text-center">
+      <p class="section-label">Fauna del territorio</p>
+      <h2 class="section-title">Galería de <em>aves</em></h2>
+      <div class="divider center"></div>
+      <p class="section-sub">Haz clic en cada ave para conocer su ficha completa: nombre científico, sonido y fotografías.</p>
+    </div>
 
-          <div style="position: absolute; bottom: 0; background: rgba(15,43,61,0.8); width: 100%; padding: 10px; color: white; text-align: center; font-weight: 600; font-size: 0.9rem;">
-            [(#TITRE|supprimer_numero|supprimer_tags)]
-          </div>
-        </div>
-      </a>
-      <!-- Fin Bucle -->
-      </BOUCLE_galeria_articulos>
+    <div class="teachers-grid">
+
+<B_aves>
+<BOUCLE_aves(ARTICLES) {id_rubrique} {par date} {inverse}>
+<a href="#URL_ARTICLE" class="teacher-card">
+  <div class="photo">
+    
+    <!-- Imagen del artículo (Documento adjunto) -->
+    <BOUCLE_img_art(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {par id_document} {inverse} {0,1}>
+      <img src="[(#FICHIER|image_passe_partout{282,200}|image_recadre{282,200,center}|extraire_attribut{src})]" alt="[(#_aves:TITRE|attribut_html)]" loading="lazy">
+    </BOUCLE_img_art>
+      <!-- Alternativa: Si no hay documento, usa el Logo del artículo -->
+      [<img src="(#LOGO_ARTICLE|image_passe_partout{282,200}|image_recadre{282,200,center}|extraire_attribut{src})" alt="[(#TITRE|attribut_html)]" loading="lazy">]
+    <//B_img_art>
+
+  </div>
+  <h4>[(#TITRE|supprimer_numero)]</h4>
+  <div class="role"><em>[(#SURTITRE|supprimer_tags)]</em></div>
+</a>
+</BOUCLE_aves>
+</B_aves>
 
     </div>
   </div>
 </section>
-</B_galeria_articulos>
 
 <!-- FOOTER -->
 
