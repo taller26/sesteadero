@@ -1,0 +1,41 @@
+
+<div class="breadcrumb">
+  <!-- Enlace al inicio del sitio -->
+  <a href="#URL_SITE_SPIP">Inicio</a>
+
+  <!-- 1. SI ESTÁ EN UN ARTÍCULO -->
+  [(#ID_ARTICLE|oui)
+    <!-- Jerarquía de secciones padres (excluyendo la sección directa del artículo si se desea, o la ruta completa) -->
+    <BOUCLE_hier_art(HIERARCHIE) {id_article}>
+      <span class="sep"><i class="fa fa-angle-double-right"></i></span>
+      <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+    </BOUCLE_hier_art>
+    
+    <!-- Sección directa del artículo (con link) antes de llegar al artículo final -->
+    <BOUCLE_sec_art(RUBRIQUES) {id_rubrique}>
+      <span class="sep"><i class="fa fa-angle-double-right"></i></span>
+      <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+    </BOUCLE_sec_art>
+
+    <!-- Título del Artículo actual (sin link, clase current) -->
+    <BOUCLE_act_art(ARTICLES) {id_article}>
+      <span class="sep"><i class="fa fa-angle-double-right"></i></span>
+      <span class="current">[(#TITRE|supprimer_numero)]</span>
+    </BOUCLE_act_art>
+  ]
+
+  <!-- 2. SI ESTÁ EN UNA SECCIÓN -->
+  [(#ID_RUBRIQUE|oui)
+    <!-- Jerarquía de secciones PADRES (excluyendo la sección actual para que no se repita) -->
+    <BOUCLE_hier_rub(HIERARCHIE) {id_rubrique} {id_rubrique != #ENV{id_rubrique}}>
+      <span class="sep"><i class="fa fa-angle-double-right"></i></span>
+      <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
+    </BOUCLE_hier_rub>
+
+    <!-- Título de la Sección actual (sin link, clase current) -->
+    <BOUCLE_act_rub(RUBRIQUES) {id_rubrique}>
+      <span class="sep"><i class="fa fa-angle-double-right"></i></span>
+      <span class="current">[(#TITRE|supprimer_numero)]</span>
+    </BOUCLE_act_rub>
+  ]
+</div>

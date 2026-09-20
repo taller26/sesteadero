@@ -1,0 +1,108 @@
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>#NOM_SITE_SPIP</title>
+
+<INCLURE{fond=inclures/cabeceraparatodos}{env} />
+
+
+
+</head>
+<body>
+
+<!-- TOPBAR -->
+<INCLURE{fond=inclures/topbar}{env} />
+
+<!-- NAVBAR -->
+<INCLURE{fond=inclures/navbar}{env} />
+
+
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="inner">
+    <h1>Nuestras <em>#TITRE</em></h1>
+    <p>Videos realizados por la comunidad educativa de nuestro territorio.</p>
+
+<!-- MIGASDEPAN -->
+<INCLURE{fond=inclures/migasdepan, id_rubrique} />
+
+
+  </div>
+</div>
+
+<!-- LISTADO DE VIDEOS -->
+<section class="video-section" style="padding-bottom:80px">
+  <div class="container">
+    <div class="text-center">
+      <h2 class="section-title" style="color:var(--white)">Todas las <em>producciones</em></h2>
+      <div class="divider center"></div>
+    </div>
+
+
+
+
+<B_videos_articulos>
+<div class="videos-grid" style="margin-top:44px">
+
+  <BOUCLE_videos_articulos(ARTICLES) {id_rubrique} {par date} {inverse}>
+  
+    <!-- 1. Extraemos el ID del video desde el antetítulo (#SURTITRE) -->
+    [(#SET{yt_paso1, #SURTITRE|explode{'v='}|end})]
+    [(#SET{yt_paso2, #GET{yt_paso1}|explode{'/'}|end})]
+    [(#SET{yt_id,    #GET{yt_paso2}|explode{'?'}|reset|explode{'&'}|reset})]
+
+    <div class="video-card">
+      
+      <!-- 2. EL CAMBIO CLAVE: Armamos la URL 'embed' en el data-video-src -->
+      <!-- Le agregamos ?autoplay=1 para que inicie solo al abrir el lightbox -->
+      <a href="#" class="video-wrapper" title="[(#TITRE|attribut_html)]" data-video-src="https://www.youtube.com/embed/#GET{yt_id}?autoplay=1">
+        
+        <!-- Miniatura automática -->
+        <img src="https://img.youtube.com/vi/#GET{yt_id}/maxresdefault.jpg" alt="[(#TITRE|attribut_html)]">
+        
+        <div class="play-btn"><i class="fa fa-play"></i></div>
+      </a>
+
+      <!-- 3. Información del artículo -->
+      <div class="video-card-info">
+        <h4>[(#TITRE|supprimer_numero|supprimer_tags)]</h4>
+        <p>[(#DESCRIPTIF|sinon{#TEXTE|couper{120}})]</p>
+      </div>
+
+    </div>
+
+  </BOUCLE_videos_articulos>
+
+</div>
+</B_videos_articulos>
+
+
+
+</section>
+
+<!-- LIGHTBOX DE VIDEO -->
+<div class="video-lightbox-overlay" id="videoLightbox">
+  <div class="video-lightbox-inner">
+    <div class="video-lightbox-close" id="vlbClose"><i class="fa fa-times"></i></div>
+    <div class="video-frame-wrap" id="vlbFrameWrap"></div>
+  </div>
+</div>
+
+
+<!-- FOOTER -->
+
+<INCLURE{fond=inclures/footer}{env} />
+
+<!-- BACK TO TOP -->
+<a href="#" class="back-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></a>
+
+
+<INCLURE{fond=inclures/jotaeses}{env} />
+
+</body>
+</html>
+</BOUCLE_principale>

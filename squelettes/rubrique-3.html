@@ -29,21 +29,7 @@
     #DESCRIPTIF
    
         
-    <div class="breadcrumb">
-  <!-- Enlace al inicio del sitio -->
-  <a href="#URL_SITE_SPIP">Inicio</a>
-
-  <!-- Recorre las secciones padre si existen -->
-  <BOUCLE_ariane(HIERARCHIE) {id_rubrique}>
-    <span class="sep"><i class="fa fa-angle-double-right"></i></span>
-    <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a>
-  </BOUCLE_ariane>
-
-  <!-- Sección actual -->
-  <span class="sep"><i class="fa fa-angle-double-right"></i></span>
-  <span class="current">[(#TITRE|supprimer_numero)]</span>
-</div>
-
+<INCLURE{fond=inclures/migasdepan, id_rubrique} />
 
 
   </div>
