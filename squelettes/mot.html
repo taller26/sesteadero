@@ -1,0 +1,121 @@
+<BOUCLE_principale(MOTS) {id_mot}> 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>#NOM_SITE_SPIP</title>
+
+<INCLURE{fond=inclures/cabeceraparatodos}{env} />
+
+
+
+</head>
+<body>
+
+<!-- TOPBAR -->
+<INCLURE{fond=inclures/topbar}{env} />
+
+<!-- NAVBAR -->
+<INCLURE{fond=inclures/navbar}{env} />
+
+
+
+
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="inner">
+    <h1>Palabra clave: <em>#TITRE</em></h1>
+    <p>Todos los artículos y noticias del sitio, de cualquier sección, relacionados con esta palabra clave.</p>
+
+    
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="about">
+  <div class="container text-center">
+    <p class="section-label">Palabra clave</p>
+    <h2 class="section-title">Artículos etiquetados con <em>#TITRE</em></h2>
+    <div class="divider center"></div>
+    <p class="section-sub">
+     <B_articulos_mot>
+    [(#TOTAL_BOUCLE|=={1}|?{1 artículo, #TOTAL_BOUCLE artículos})]
+    <BOUCLE_articulos_mot(ARTICLES) {id_mot} {tout}>
+    </BOUCLE_articulos_mot>
+</B_articulos_mot>
+[<span class="sin-articulos">0 artículos</span>]
+<//B_articulos_mot>, agrupados de varias secciones del sitio.</p>
+  </div>
+</section>
+
+<!-- RESULTADOS AGRUPADOS -->
+<section class="courses">
+  <div class="container">
+    <div class="blog-grid">
+
+
+      <B_articulos_moto>
+    <BOUCLE_articulos_moto(ARTICLES) {id_mot} {tout}>
+      <div class="blog-card">
+        <div class="thumb">
+            [(#LOGO_ARTICLE|image_reduire{384,0}|image_recadre{384,200,center}|inserer_attribut{alt,[(#TITRE|attribut_html)]})]
+        </div>
+        <div class="body">
+          <div class="blog-meta">
+            <span><i class="fa fa-folder"></i> <BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>[(#TITRE)]</BOUCLE_rubrique></span>
+          </div>
+          <h4><a href="[(#URL_ARTICLE)]">[(#TITRE)]</a></h4>
+          <p>[(#INTRODUCTION{80})]</p>
+          <a href="[(#URL_ARTICLE)]" class="read-more">Leer artículo completo <i class="fa fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </BOUCLE_articulos_moto>
+    </B_articulos_moto>
+    <//B_articulos_moto>
+
+
+    </div>
+  </div>
+</section>
+
+<!-- TODAS LAS PALABRAS CLAVE -->
+<section class="blog">
+  <div class="container text-center">
+    <p class="section-label">Explorar por tema</p>
+    <h2 class="section-title">Todas las <em>palabras clave</em></h2>
+    <div class="divider center"></div>
+
+  <div class="keyword-tags" style="justify-content:center; margin-top:8px;">
+    <BOUCLE_lista_mots(MOTS) {tout}>
+        <BOUCLE_es_activo(CONDITION) {si #ID_MOT|=={#ENV{id_mot}}}>
+            <!-- Si es la palabra clave actual, se muestra como texto/span sin enlace -->
+            <span class="active">[(#TITRE)]</span>
+        </BOUCLE_es_activo>
+            <!-- Si NO es la palabra clave actual, se mantiene como enlace normal -->
+            <a href="[(#URL_MOT)]">[(#TITRE)]</a>
+        <//B_es_activo>
+    </BOUCLE_lista_mots>
+</div>
+  </div>
+</section>
+
+
+
+
+
+
+<!-- FOOTER -->
+
+<INCLURE{fond=inclures/footer}{env} />
+
+<!-- BACK TO TOP -->
+<a href="#" class="back-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></a>
+
+<INCLURE{fond=inclures/jotaeses}{env} />
+
+
+</body>
+</html>
+</BOUCLE_principale>

@@ -57,7 +57,7 @@
       font-size: .875rem; font-weight: 500; padding: 8px 12px;
       border-radius: 6px; color: var(--teal); transition: var(--transition);
     }
-    .nav-links a:hover, .nav-links a.active { color: var(--orange); }
+    .nav-links a:hover, .nav-links a.active, .keyword-tags a.active { color: var(--orange); }
 
     .nav-cta {
       background: var(--orange); color: var(--white);
@@ -824,7 +824,7 @@ blockquote.spip {
 .related-item span { font-size: .72rem; color: var(--text-light); display: block; margin-top: 4px; }
 
 .keyword-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.keyword-tags a { padding: 6px 14px; border: 1px solid #ddd; border-radius: 20px; font-size: .78rem; color: var(--text); transition: var(--transition); }
+.keyword-tags a, .keyword-tags .active  { padding: 6px 14px; border: 1px solid #ddd; border-radius: 20px; font-size: .78rem; color: var(--text); transition: var(--transition); }
 .keyword-tags a:hover { background: var(--orange); color: var(--white); border-color: var(--orange); }
 
 @media (max-width: 1024px) { .article-layout { grid-template-columns: 1fr; } }
