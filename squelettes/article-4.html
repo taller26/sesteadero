@@ -1,0 +1,187 @@
+<BOUCLE_principale(ARTICLES) {id_article}>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>#NOM_SITE_SPIP</title>
+
+<INCLURE{fond=inclures/cabeceraparatodos}{env} />
+
+
+
+</head>
+<body>
+
+<!-- TOPBAR -->
+<INCLURE{fond=inclures/topbar}{env} />
+
+<!-- NAVBAR -->
+<INCLURE{fond=inclures/navbar}{env} />
+
+
+
+
+
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="inner">
+    <h1>#TITRE</h1>
+
+    
+    <!-- MIGASDEPAN -->
+<INCLURE{fond=inclures/migasdepan, id_article} />
+
+
+  </div>
+</div>
+
+<!-- FICHA DEL AVE -->
+<section class="about">
+  <div class="container">
+    <div class="bio-header">
+      <div class="bio-photo">
+        <img src="https://images.unsplash.com/photo-1727288378926-76212407b2d8?w=700&q=80" alt="Quetzal Cabecidorado">
+      </div>
+      <div>
+        <h1>#TITRE</h1>
+        <span class="scientific-name">#SURTITRE</span>
+        <div class="bio-tags">
+          <span><i class="fa fa-feather"></i> Familia: #SOUSTITRE</span>
+          
+        </div>
+        <p class="lead">[(#DESCRIPTIF|textebrut)]</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESCRIPCIÓN -->
+<section class="courses">
+  <div class="container">
+    <p class="section-label">Sobre esta especie</p>
+    <h2 class="section-title" style="margin-bottom:22px">Descripción</h2>
+    <div class="article-body" style="max-width:900px">
+      #TEXTE
+    </div>
+  </div>
+</section>
+
+
+
+<!-- AUDIO DEL CANTO -->
+<B_audio_articulos>
+<section class="blog">
+  <div class="container">
+    <p class="section-label">Registro sonoro</p>
+    <h2 class="section-title" style="margin-bottom:22px">Escucha su <em>canto</em></h2>
+    
+    <BOUCLE_audio_articulos(ARTICLES) {id_article}>
+      <BOUCLE_mp3(DOCUMENTS) {id_article} {extension=mp3} {par id_document} {inverse} >
+      <div class="audio-card" style="max-width:700px; margin-bottom: 20px;">
+        <div class="audio-icon"><i class="fa fa-volume-up"></i></div>
+        <div class="audio-body">
+          <h5>Canto del [(#_audio_articulos:TITRE|supprimer_numero|supprimer_tags)]</h5>
+          <audio controls style="width: 100%; margin-top: 10px;">
+            <source src="[(#FICHIER)]" type="audio/mpeg">
+            Tu navegador no soporta el elemento de audio.
+          </audio>
+        </div>
+      </div>
+      </BOUCLE_mp3>
+    </BOUCLE_audio_articulos>
+
+  </div>
+</section>
+</B_audio_articulos>
+
+
+
+<!-- GALERÍA DE FOTOS (lightbox) -->
+<B_galeria_fotos>
+<section class="events">
+  <div class="container">
+    <p class="section-label">Registro fotográfico</p>
+    <h2 class="section-title" style="margin-bottom:22px">Galería de <em>fotos</em></h2>
+    
+    <div class="mini-gallery" data-lightbox-gallery>
+      
+      <BOUCLE_galeria_fotos(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {par id_document}>
+      <div class="mg-item" data-lightbox-src="[(#FICHIER|image_reduire{1200,0}|extraire_attribut{src})]" data-lightbox-alt="[(#TITRE|sinon{#_galeria_fotos:CREDITS}|attribut_html)]">
+        
+        <!-- Imagen miniatura recortada exactamente a 291x120 px desde el centro -->
+        <img src="[(#FICHIER
+                    |image_passe_partout{291, 120}
+                    |image_recadre{291, 120, center}
+                    |extraire_attribut{src})]" 
+             alt="[(#TITRE|sinon{#_galeria_fotos:CREDITS}|attribut_html)]"
+             style="width: 291px; height: 120px; object-fit: cover;">
+        
+        <div class="mg-zoom"><i class="fa fa-search-plus"></i></div>
+      </div>
+      </BOUCLE_galeria_fotos>
+
+    </div>
+  </div>
+</section>
+</B_galeria_fotos>
+
+
+
+<!-- DOCUMENTOS ANEXOS -->
+<B_documentos_pdf>
+<section class="gallery">
+  <div class="container">
+    <p class="section-label">Para saber más</p>
+    <h2 class="section-title" style="margin-bottom:22px">Documentos <em>anexos</em></h2>
+    
+    <div class="attachments-list" style="max-width:700px">
+      
+      <BOUCLE_documentos_pdf(DOCUMENTS) {id_article} {extension=pdf} {par id_document}>
+      <a class="attachment-item" href="#URL_DOCUMENT" target="_blank">
+        <div class="att-icon"><i class="fa fa-file-pdf"></i></div>
+        <div class="att-info">
+          <h6>[(#TITRE|sinon{#FICHIER|basename})]</h6>
+          <span>PDF · [(#TAILLE|taille_en_octets)]</span>
+        </div>
+        <div class="att-download"><i class="fa fa-download"></i></div>
+      </a>
+      </BOUCLE_documentos_pdf>
+
+    </div>
+  </div>
+</section>
+</B_documentos_pdf>
+
+
+
+<!-- LIGHTBOX DE FOTOS -->
+<div class="lightbox-overlay" id="lightbox">
+  <div class="lightbox-inner">
+    <div class="lightbox-close" id="lbClose"><i class="fa fa-times"></i></div>
+    <div class="lightbox-nav prev" id="lbPrev"><i class="fa fa-chevron-left"></i></div>
+    <img id="lbImg" src="" alt="">
+    <div class="lightbox-nav next" id="lbNext"><i class="fa fa-chevron-right"></i></div>
+    <div class="lightbox-counter" id="lbCounter"></div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- FOOTER -->
+
+<INCLURE{fond=inclures/footer}{env} />
+
+<!-- BACK TO TOP -->
+<a href="#" class="back-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></a>
+
+<INCLURE{fond=inclures/jotaeses}{env} />
+
+
+</body>
+</html>
+</BOUCLE_principale>

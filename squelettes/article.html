@@ -21,33 +21,156 @@
 
 
 
-<div class="page-hero">
-  <div>
-     <h1>#TITRE</h1>
-    <p style="max-width: 700px; margin: 15px auto; opacity: 0.9; font-size: 0.8rem;">
-      [(#DESCRIPTIF|textebrut)]   </p>
-     [(#TEXTE|replace{'<p', '<p style="text-align: justify;"'})]
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="inner">
+    <h1>#TITRE</h1>
+
+    <!-- MIGASDEPAN -->
+<INCLURE{fond=inclures/migasdepan, id_article} />
+
+
   </div>
 </div>
 
-<B_fotos>
-<section class="gallery">
-  <div class="container">
-    <div class="gallery-grid">
+<!-- CONTENIDO DEL ARTÍCULO -->
+<div class="article-layout">
+
+  <!-- COLUMNA PRINCIPAL -->
+  <div class="article-main">
+    <p class="article-eyebrow">10 Caminos pedagógicos</p>
+    <h1>#TITRE</h1>
+    <p class="article-subtitle">#SOUSTITRE</p>
+
+    <div class="article-hero-img">
+    <B_imagen_articulo>
+<BOUCLE_imagen_articulo(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {par id_document} {0,1}>
+  <img src="[(#FICHIER|image_reduire{774,0}|extraire_attribut{src})]" alt="[(#TITRE|attribut_html|sinon{[(#_principal:TITRE|attribut_html)]})]" />
+</BOUCLE_imagen_articulo>
+</B_imagen_articulo>
+    </div>
+
+    <p class="article-lead">[(#DESCRIPTIF|textebrut)]</p>
+
+    <div class="article-body">
+      #TEXTE
+    </div>
+
+    <!-- GALERÍA DE FOTOS DEL ARTÍCULO (lightbox) -->
+<B_galeria_imagenes>
+    <div class="article-extra">
+      <p class="article-block-title">Galería de fotos</p>
+      <div class="mini-gallery" data-lightbox-gallery>
+        
+        <BOUCLE_galeria_imagenes(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {par id_document}>
+        <div class="mg-item" 
+             data-lightbox-src="[(#FICHIER|image_reduire{1200,0}|extraire_attribut{src})]" 
+             data-lightbox-alt="[(#TITRE|attribut_html|sinon{[(#_principal:TITRE|attribut_html)]})]"
+             tabindex="0" role="button">
+          
+          <img src="[(#FICHIER|image_passe_partout{185,120}|image_recadre{184.5,120,center}|extraire_attribut{src})]" 
+               alt="[(#TITRE|attribut_html|sinon{[(#_principal:TITRE|attribut_html)]})]" 
+               loading="lazy">
+          
+          <div class="mg-zoom"><i class="fa fa-search-plus"></i></div>
+        </div>
+        </BOUCLE_galeria_imagenes>
+
+      </div>
+    </div>
+</B_galeria_imagenes>
+
+
+<!-- DOCUMENTOS ANEXOS -->
+<B_documentos_pdf>
+    <div class="article-extra">
+      <p class="article-block-title">Documentos anexos</p>
+      <div class="attachments-list">
+        
+        <BOUCLE_documentos_pdf(DOCUMENTS) {id_article} {extension=pdf} {par id_document}>
+        <a class="attachment-item" href="#URL_DOCUMENT" target="_blank">
+          <div class="att-icon"><i class="fa fa-file-pdf"></i></div>
+          <div class="att-info">
+            <h6>[(#TITRE|supprimer_numero|sinon{#FICHIER|basename})]</h6>
+            <span>PDF · [(#TAILLE|taille_en_octets)]</span>
+          </div>
+          <div class="att-download"><i class="fa fa-download"></i></div>
+        </a>
+        </BOUCLE_documentos_pdf>
+
+      </div>
+    </div>
+</B_documentos_pdf>
+
+
+ <!-- fin article main -->
+  </div>
+
+  <!-- BARRA LATERAL -->
+  <aside class="article-sidebar">
+    <div class="sidebar-widget">
+      <div class="widget-head"><h4>Artículos de esta sección</h4></div>
       
-      <!-- Bucle que recorre las imágenes adjuntas al artículo -->
-      <BOUCLE_fotos(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {par num titre, id_document}>
-      <!-- Bucle de fotos de esta galería que abren en Lightbox -->
-      <a href="#URL_DOCUMENT" class="g-item" data-lightbox="galeria-[(#ID_ARTICLE)]">
-        <img src="[(#FICHIER|image_reduire{400,0}|extraire_attribut{src})]" alt="[(#TITRE|sinon{#_principal:TITRE}|supprimer_tags|attribut_html)]">
-      </a>
-      <!-- Fin Bucle -->
-      </BOUCLE_fotos>
+      
+<div class="widget-body">
+  
+  <!-- Bucle para cargar los últimos 5 artículos de la misma sección (excluyendo el actual) -->
+  <BOUCLE_articulos_relacionados(ARTICLES) {id_rubrique} {id_article != #ENV{id_article}} {par date} {inverse} {0,5}>
+  <a class="related-item" href="#URL_ARTICLE">
+    
+    <!-- Imagen: reducida a 66px y recortada exactamente a 66x54px centrada -->
+    <BOUCLE_img_rel(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {par id_document} {inverse} {0,1}>
+      <img src="[(#FICHIER|image_reduire{66,0}|image_recadre{66,54,center}|extraire_attribut{src})]" alt="[(#_articulos_relacionados:TITRE|attribut_html)]" loading="lazy">
+    </BOUCLE_img_rel>
+      [<img src="(#LOGO_ARTICLE|image_reduire{66,0}|image_recadre{66,54,center}|extraire_attribut{src})" alt="[(#TITRE|attribut_html)]" loading="lazy">]
+    <//B_img_rel>
+
+    <div>
+      <h5>[(#TITRE|supprimer_numero)]</h5>
+      <span>[(#DESCRIPTIF|sinon{#TEXTE}|supprimer_tags|couper{80})]</span>
+    </div>
+  </a>
+  </BOUCLE_articulos_relacionados>
+
+</div>
+
+
 
     </div>
+
+<B_mots>
+    <div class="sidebar-widget">
+      <div class="widget-head"><h4>Palabras clave</h4></div>
+      <div class="widget-body">
+        <div class="keyword-tags">
+          
+          <BOUCLE_mots(MOTS) {id_article} {par titre}>
+          <a href="#URL_MOT">[(#TITRE|supprimer_numero)]</a>
+          </BOUCLE_mots>
+
+        </div>
+      </div>
+    </div>
+</B_mots>
+
+
+  </aside>
+</div>
+
+<!-- LIGHTBOX DE FOTOS -->
+<div class="lightbox-overlay" id="lightbox">
+  <div class="lightbox-inner">
+    <div class="lightbox-close" id="lbClose"><i class="fa fa-times"></i></div>
+    <div class="lightbox-nav prev" id="lbPrev"><i class="fa fa-chevron-left"></i></div>
+    <img id="lbImg" src="" alt="">
+    <div class="lightbox-nav next" id="lbNext"><i class="fa fa-chevron-right"></i></div>
+    <div class="lightbox-counter" id="lbCounter"></div>
   </div>
-</section>
-</B_fotos>
+</div>
+
+
+
 
 
 <!-- FOOTER -->
