@@ -13,21 +13,22 @@
 <body>
 
 <!-- TOPBAR -->
-<INCLURE{fond=inclures/topbar, env}></INCLURE>
+<INCLURE{fond=inclures/topbar, env}>
 
 <!-- NAVBAR -->
-<INCLURE{fond=inclures/navbar}></INCLURE>
+<INCLURE{fond=inclures/navbar, env}>
 
 <!-- HERO -->
-<section class="hero">
+ 
+<BOUCLE_hero_aleatorio(ARTICLES) {id_article=30}>
+  <BOUCLE_imagen_fondo(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {par hasard} {0,1}>
+<section class="hero" style="background: linear-gradient(135deg, rgba(11,37,56,.88) 45%, rgba(11,37,56,.55) 100%), url('#URL_DOCUMENT') center/cover no-repeat;"></BOUCLE_imagen_fondo></BOUCLE_hero_aleatorio>
+
+  
   <div class="inner">
-    <div class="badge"><i class="fa fa-star"></i> EWducación propia</div>
     <h1>Institución Educativa<br><em>El Sesteadero</em></h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eu sapien eget neque sollicitudin consequat eu ut eros.</p>
-    <div class="hero-btns">
-      <a href="#courses" class="btn-primary">Explorar PEI <i class="fa fa-arrow-right" style="margin-left:6px"></i></a>
-      <a href="#about" class="btn-outline">Saber más</a>
-    </div>
+    <p>#SLOGAN</p>
+
   </div>
 </section>
 
@@ -260,59 +261,6 @@
 </BOUCLE_seccion_galeria>
 
 
-<!-- EVENTS 
-<section class="events" id="events">
-  <div class="container">
-    <div class="text-center">
-      <p class="section-label">Próximamente</p>
-      <h2 class="section-title">Nuestros proximos<em>eventos</em></h2>
-      <div class="divider center"></div>
-    </div>
-    <div class="events-grid">
-      <div class="event-card">
-        <div class="thumb">
-          <img src="squelettes/imagenes/16.jpg" alt="Event"/>
-          <div class="date-badge">Jun 24</div>
-        </div>
-        <div class="body">
-          <h4>Encuentro cultural</h4>
-          <div class="event-meta">
-            <span><i class="fa fa-map-marker-alt"></i> Toribío</span>
-            <span><i class="fa fa-clock"></i> 9:00 AM – 5:00 PM</span>
-          </div>
-        </div>
-      </div>
-      <div class="event-card">
-        <div class="thumb">
-          <img src="squelettes/imagenes/11.jpg" alt="Event"/>
-          <div class="date-badge">Jul 08</div>
-        </div>
-        <div class="body">
-          <h4>Día de la semilla</h4>
-          <div class="event-meta">
-            <span><i class="fa fa-map-marker-alt"></i> I.E. El sesteadero</span>
-            <span><i class="fa fa-clock"></i> 10:00 AM – 4:00 PM</span>
-          </div>
-        </div>
-      </div>
-      <div class="event-card">
-        <div class="thumb">
-          <img src="squelettes/imagenes/13.jpg" alt="Event"/>
-          <div class="date-badge">Ago 15</div>
-        </div>
-        <div class="body">
-          <h4>Mercado campesino</h4>
-          <div class="event-meta">
-            <span><i class="fa fa-map-marker-alt"></i> I.E. CECIDIC</span>
-            <span><i class="fa fa-clock"></i> 8:00 AM – 6:00 PM</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
--->
-
 <!-- CONTACT SPLIT -->
 <div class="contact-split" id="contact">
 
@@ -440,7 +388,7 @@
 <!-- BACK TO TOP -->
 <a href="#" class="back-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></a>
 
-
+<INCLURE{fond=inclures/jotaeses}{env} />
 
 
 </body>
