@@ -44,16 +44,22 @@
 <section class="about">
   <div class="container">
     <div class="bio-header">
+   
       <div class="bio-photo">
-        <img src="https://images.unsplash.com/photo-1727288378926-76212407b2d8?w=700&q=80" alt="Quetzal Cabecidorado">
-      </div>
-      <div>
+  <B_primera_foto>
+  <BOUCLE_primera_foto(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {0,1}>
+    <img src="[(#FICHIER|image_reduire{0,320}|image_recadre{320,320}|extraire_attribut{src})]" alt="[(#TITRE|sinon{#_principal:TITRE}|supprimer_tags|attribut_html)]">
+  </BOUCLE_primera_foto>
+    <!-- Alternativa por si el artículo no tiene documentos adjuntos: usa el Logo del Artículo -->
+    [<img src="(#LOGO_ARTICLE|image_reduire{0,320}|image_recadre{320,320}|extraire_attribut{src})" alt="[(#TITRE|supprimer_tags|attribut_html)]">]
+  <//B_primera_foto>
+</div>
+
         <h1>#TITRE</h1>
-        <span class="scientific-name">#SURTITRE</span>
-        <div class="bio-tags">
-          <span><i class="fa fa-feather"></i> Familia: #SOUSTITRE</span>
-          
-        </div>
+        [<span class="scientific-name">(#SURTITRE)</span>]
+        [<div class="bio-tags">
+          <span><i class="fa fa-feather"></i> Familia: (#SOUSTITRE)</span>
+        </div>]
         <p class="lead">[(#DESCRIPTIF|textebrut)]</p>
       </div>
     </div>
@@ -61,43 +67,41 @@
 </section>
 
 <!-- DESCRIPCIÓN -->
-<section class="courses">
+[<section class="courses">
   <div class="container">
     <p class="section-label">Sobre esta especie</p>
     <h2 class="section-title" style="margin-bottom:22px">Descripción</h2>
     <div class="article-body" style="max-width:900px">
-      #TEXTE
+      (#TEXTE)
     </div>
   </div>
-</section>
+</section>]
 
 
 
 <!-- AUDIO DEL CANTO -->
-<B_audio_articulos>
+<B_mp3>
 <section class="blog">
   <div class="container">
     <p class="section-label">Registro sonoro</p>
     <h2 class="section-title" style="margin-bottom:22px">Escucha su <em>canto</em></h2>
     
-    <BOUCLE_audio_articulos(ARTICLES) {id_article}>
-      <BOUCLE_mp3(DOCUMENTS) {id_article} {extension=mp3} {par id_document} {inverse} >
-      <div class="audio-card" style="max-width:700px; margin-bottom: 20px;">
-        <div class="audio-icon"><i class="fa fa-volume-up"></i></div>
-        <div class="audio-body">
-          <h5>Canto del [(#_audio_articulos:TITRE|supprimer_numero|supprimer_tags)]</h5>
-          <audio controls style="width: 100%; margin-top: 10px;">
-            <source src="[(#FICHIER)]" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-          </audio>
-        </div>
+    <BOUCLE_mp3(DOCUMENTS) {id_article} {extension=mp3} {par id_document} {inverse}>
+    <div class="audio-card" style="max-width:700px; margin-bottom: 20px;">
+      <div class="audio-icon"><i class="fa fa-volume-up"></i></div>
+      <div class="audio-body">
+        <h5>Canto del [(#INFO_TITRE{article, #ID_ARTICLE}|supprimer_numero|supprimer_tags)]</h5>
+        <audio controls style="width: 100%; margin-top: 10px;">
+          <source src="[(#FICHIER)]" type="audio/mpeg">
+          Tu navegador no soporta el elemento de audio.
+        </audio>
       </div>
-      </BOUCLE_mp3>
-    </BOUCLE_audio_articulos>
+    </div>
+    </BOUCLE_mp3>
 
   </div>
 </section>
-</B_audio_articulos>
+</B_mp3>
 
 
 
