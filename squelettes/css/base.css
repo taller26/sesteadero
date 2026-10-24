@@ -919,3 +919,27 @@ blockquote.spip {
 .blog {
   min-height: 60vh; /* Asegura que la sección ocupe al menos el 60% del alto de la pantalla */
 }
+
+
+
+.cenefa-decorativa {
+    width: 100%;
+    height: 40px;
+    
+    /* El color que tú quieras para tu cenefa */
+    background-color: #0f2b3b; /* Por ejemplo, un tono rojo/coral */
+    
+    /* Aplicamos el SVG como máscara */
+    -webkit-mask-image: url('../imagenes/simbologia.svg');
+    mask-image: url('../imagenes/simbologia.svg');
+    
+    /* Configuramos la repetición */
+    -webkit-mask-repeat: repeat-x;
+    mask-repeat: repeat-x;
+    -webkit-mask-size: auto 100%;
+    mask-size: auto 100%;
+    -webkit-mask-position: center;
+    mask-position: center;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
