@@ -1,0 +1,115 @@
+<BOUCLE_principale(ARTICLES) {id_article}>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>#NOM_SITE_SPIP</title>
+
+<INCLURE{fond=inclures/cabeceraparatodos}{env} />
+
+
+
+</head>
+<body>
+
+<!-- TOPBAR -->
+<INCLURE{fond=inclures/topbar}{env} />
+
+<!-- NAVBAR -->
+<INCLURE{fond=inclures/navbar}{env} />
+
+
+
+
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="inner">
+
+    <!-- MIGASDEPAN -->
+<INCLURE{fond=inclures/migasdepan, id_article} />
+
+
+  </div>
+</div>
+
+<!-- REPRODUCTOR -->
+<section class="about">
+  <div class="container">
+    <!-- .article-main es necesario: el estilo del sobretítulo, el h1 y el subtítulo está acotado a esa clase -->
+    <div class="article-main" style="max-width:900px;margin:0 auto;text-align:center;">
+      <p class="article-eyebrow">Producciones</p>
+      <h1>[(#TITRE|supprimer_numero|supprimer_tags)]</h1>
+   
+      <!-- Extracción limpia y segura del ID de YouTube desde el antetítulo (#SURTITRE) -->
+      [(#SET{yt_paso1, #SURTITRE|explode{'v='}|end})]
+      [(#SET{yt_paso2, #GET{yt_paso1}|explode{'/'}|end})]
+      [(#SET{yt_id,    #GET{yt_paso2}|explode{'?'}|reset|explode{'&'}|reset})]
+
+      <div class="video-frame-wrap" style="margin:24px 0;box-shadow:0 12px 34px rgba(0,0,0,.18);">
+        <iframe src="https://www.youtube.com/embed/#GET{yt_id}?rel=0" title="[(#TITRE|attribut_html)]" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+
+      <div class="article-body" style="text-align:left;">
+        [(#TEXTE|sinon{#DESCRIPTIF})]
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- OTRAS PRODUCCIONES -->
+<B_otras_producciones>
+<section class="courses">
+  <div class="container">
+    <div class="text-center">
+      <p class="section-label">Sigue viendo</p>
+      <h2 class="section-title">Más <em>producciones</em></h2>
+      <div class="divider center"></div>
+    </div>
+
+    <div class="videos-grid" style="margin-top:40px">
+
+      <BOUCLE_otras_producciones(ARTICLES) {id_rubrique} {!id_article} {par date} {inverse}>
+      <!-- Extraemos el ID del video desde el antetítulo (#SURTITRE) de cada artículo -->
+      [(#SET{yt_paso1, #SURTITRE|explode{'v='}|end})]
+      [(#SET{yt_paso2, #GET{yt_paso1}|explode{'/'}|end})]
+      [(#SET{yt_id,    #GET{yt_paso2}|explode{'?'}|reset|explode{'&'}|reset})]
+
+      <div class="video-card">
+        <a href="#URL_ARTICLE" class="video-wrapper" title="[(#TITRE|supprimer_numero|supprimer_tags|attribut_html)]">
+          <img src="https://img.youtube.com/vi/#GET{yt_id}/maxresdefault.jpg" alt="[(#TITRE|supprimer_numero|supprimer_tags|attribut_html)]" loading="lazy">
+          <div class="play-btn"><i class="fa fa-play"></i></div>
+        </a>
+        <div class="video-card-info">
+          <h4><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|supprimer_tags)]</a></h4>
+          [<p>(#DESCRIPTIF)</p>]
+        </div>
+      </div>
+      </BOUCLE_otras_producciones>
+
+      
+    </div>
+  </div>
+</section>
+</B_otras_producciones>
+
+
+
+
+
+<!-- FOOTER -->
+
+<INCLURE{fond=inclures/footer}{env} />
+
+<!-- BACK TO TOP -->
+<a href="#" class="back-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></a>
+
+<INCLURE{fond=inclures/jotaeses}{env} />
+
+
+</body>
+</html>
+</BOUCLE_principale>
