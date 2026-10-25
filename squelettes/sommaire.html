@@ -42,11 +42,11 @@
       <!-- Imágenes de la Rubrique 2 -->
       <div class="about-imgs">
         <!-- Imagen Principal (Primera imagen de la rubrique) -->
-        <BOUCLE_img_main(DOCUMENTS) {id_rubrique} {extension IN jpg,png,gif,webp} {0,1}>
-        <div class="img-main">
-          <img src="#URL_DOCUMENT" alt="[(#TITRE|attribut_html|sinon{#_seccion_about:TITRE|attribut_html})]" />
-        </div>
-        </BOUCLE_img_main>
+<BOUCLE_img_main(DOCUMENTS) {id_rubrique} {extension IN jpg,png,gif,webp} {0,1}>
+  <div class="img-main">
+    <img src="[(#FICHIER|image_reduire{575,0}|image_recadre{575,320,center}|extraire_attribut{src})]" alt="[(#TITRE|attribut_html|sinon{#_seccion_about:TITRE|attribut_html})]" />
+  </div>
+</BOUCLE_img_main>
 
         <!-- Imagen Secundaria (Segunda imagen de la rubrique) -->
         <BOUCLE_img_small(DOCUMENTS) {id_rubrique} {extension IN jpg,png,gif,webp} {1,1}>

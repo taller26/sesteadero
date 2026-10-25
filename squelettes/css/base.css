@@ -637,7 +637,7 @@
 .page-header {
   background: linear-gradient(135deg, rgba(15,43,61,.92) 15%, rgba(13,52,72,.84) 100%),
     url('https://images.unsplash.com/photo-1783099994473-8be2b5d14e00?w=1600&q=80') center/cover no-repeat;
-  min-height: 250px; display: flex; align-items: center; justify-content: center;
+   display: flex; align-items: center; justify-content: center;
   text-align: center; color: var(--white); padding: 70px 20px 55px;
 }
 .page-header .inner { max-width: 760px; margin: 0 auto; }
