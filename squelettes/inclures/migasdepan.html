@@ -1,40 +1,33 @@
-<div class="breadcrumb">
-  <!-- Enlace al inicio del sitio -->
-  <a href="#URL_SITE_SPIP"><:accueil_site:></a>
+  <div class="breadcrumb">
+    <!-- Enlace al inicio del sitio -->
+    <a href="#URL_SITE_SPIP"><:accueil_site:></a>
 
-  <!-- 1. SI ESTÁ EN UN ARTÍCULO -->
-  [(#ID_ARTICLE|oui)
+    <!-- 1. SI ESTÁ EN UN ARTÍCULO -->
+[(#ID_ARTICLE|oui)
     <BOUCLE_art_migas(ARTICLES){id_article}>
-      <!-- Jerarquía de secciones padres del artículo (todas con enlace) -->
+      <!-- Bucle HIERARCHIE recorre desde la sección raíz hasta la sección contenedora del artículo -->
       <BOUCLE_hier_art(HIERARCHIE){id_article}>
         <span class="sep"><i class="fa fa-angle-double-right"></i></span>
         <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a>
       </BOUCLE_hier_art>
 
-      <!-- Sección directa del artículo (también con enlace, porque el usuario está viendo el artículo, no la sección sola) -->
-      <BOUCLE_sec_art(RUBRIQUES){id_rubrique}>
-        <span class="sep"><i class="fa fa-angle-double-right"></i></span>
-        <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a>
-      </BOUCLE_sec_art>
-
-      <!-- El artículo actual (SIN enlace, actúa como página activa actual) -->
+      <!-- El artículo actual (SIN enlace, página activa) -->
       <span class="sep"><i class="fa fa-angle-double-right"></i></span>
       <span class="current">[(#TITRE|supprimer_numero|couper{80})]</span>
     </BOUCLE_art_migas>
   ]
+    <!-- 2. SI ESTÁ EN UNA SECCIÓN -->
+    [(#ID_RUBRIQUE|oui)
+      <BOUCLE_rub_migas(RUBRIQUES){id_rubrique}>
+        <!-- Jerarquía de secciones PADRES (excluyendo la sección actual para que no se repita) -->
+        <BOUCLE_hier_rub(HIERARCHIE){id_rubrique}{id_rubrique != #ENV{id_rubrique}}>
+          <span class="sep"><i class="fa fa-angle-double-right"></i></span>
+          <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a>
+        </BOUCLE_hier_rub>
 
-  <!-- 2. SI ESTÁ EN UNA SECCIÓN -->
-  [(#ID_RUBRIQUE|oui)
-    <BOUCLE_rub_migas(RUBRIQUES){id_rubrique}>
-      <!-- Jerarquía de secciones PADRES (excluyendo la sección actual para que no se repita) -->
-      <BOUCLE_hier_rub(HIERARCHIE){id_rubrique}{id_rubrique != #ENV{id_rubrique}}>
+        <!-- La sección actual (SIN enlace, porque ya estás en ella, con clase .current para que tome estilo/color activo) -->
         <span class="sep"><i class="fa fa-angle-double-right"></i></span>
-        <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a>
-      </BOUCLE_hier_rub>
-
-      <!-- La sección actual (SIN enlace, porque ya estás en ella, con clase .current para que tome estilo/color activo) -->
-      <span class="sep"><i class="fa fa-angle-double-right"></i></span>
-      <span class="current">[(#TITRE|supprimer_numero|couper{80})]</span>
-    </BOUCLE_rub_migas>
-  ]
-</div>
+        <span class="current">[(#TITRE|supprimer_numero|couper{80})]</span>
+      </BOUCLE_rub_migas>
+    ]
+  </div>

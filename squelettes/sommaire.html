@@ -49,11 +49,11 @@
 </BOUCLE_img_main>
 
         <!-- Imagen Secundaria (Segunda imagen de la rubrique) -->
-        <BOUCLE_img_small(DOCUMENTS) {id_rubrique} {extension IN jpg,png,gif,webp} {1,1}>
-        <div class="img-small">
-          <img src="#URL_DOCUMENT" alt="[(#TITRE|attribut_html|sinon{#_seccion_about:TITRE|attribut_html})]" />
-        </div>
-        </BOUCLE_img_small>
+ <BOUCLE_img_small(DOCUMENTS) {id_rubrique} {extension IN jpg,png,gif,webp} {1,1}>
+<div class="img-small">
+  <img src="[(#FICHIER|image_reduire{152,0}|image_recadre{152,152,center}|extraire_attribut{src})]" alt="[(#TITRE|attribut_html|sinon{#_seccion_about:TITRE|attribut_html})]" />
+</div>
+</BOUCLE_img_small>
       </div>
 
       <!-- Contenido de la Rubrique 2 -->
@@ -202,7 +202,7 @@
           
           <!-- Documento de imagen adjunto al artículo -->
           <BOUCLE_img_ave(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {0,1}>
-          <img src="[(#FICHIER|image_reduire{400,0}|extraire_attribut{src})]" alt="[(#TITRE|attribut_html|sinon{#_articulos_aves:TITRE|attribut_html})]" />
+          <img src="[(#FICHIER|image_reduire{300,0}|extraire_attribut{src})]" alt="[(#TITRE|attribut_html|sinon{#_articulos_aves:TITRE|attribut_html})]" />
           </BOUCLE_img_ave>
           
           <!-- Alternativa: Si no hay documento, usa el Logo del artículo -->
@@ -240,7 +240,7 @@
       <a href="#URL_ARTICLE" class="g-item">
         
         <BOUCLE_img_art(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {par id_document} {inverse} {0,1}>
-          <img src="[(#FICHIER|image_reduire{800,0}|extraire_attribut{src})]" alt="[(#_galeria_articulos:TITRE|attribut_html)]" />
+          <img src="[(#FICHIER|image_reduire{400,0}|extraire_attribut{src})]" alt="[(#_galeria_articulos:TITRE|attribut_html)]" />
         </BOUCLE_img_art>
 
         [<img src="(#LOGO_ARTICLE|image_reduire{800,0}|extraire_attribut{src})" alt="[(#TITRE|attribut_html)]" />]
@@ -338,7 +338,7 @@
   <div class="container">
     <div class="text-center">
       <p class="section-label">[(#TITRE|supprimer_numero|textebrut)]</p>
-      <h2 class="section-title">Últimas [(#TITRE|supprimer_numero|textebrut)]</h2>
+      <h2 class="section-title">[(#TITRE|supprimer_numero|textebrut)]</h2>
       <div class="divider center"></div>
     </div>
     <div class="blog-grid">

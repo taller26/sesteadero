@@ -16,7 +16,7 @@
       </li>
 
       <!-- Bucle dinámico para las secciones raíz (excluyendo la rubrique 1) -->
-      <BOUCLE_menu(RUBRIQUES) {racine} {id_rubrique!=1} {par num titre, titre}>
+      <BOUCLE_menu(RUBRIQUES) {racine} {id_rubrique!=1} {par num titre}>
       <li>
         <a href="#URL_RUBRIQUE" class="[ (#EXPOSE{active})]">[(#TITRE|supprimer_numero)]</a>
       </li>
