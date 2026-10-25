@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>#NOM_SITE_SPIP</title>
+<style>
+  /* Estilos propios de la 404: viven aquí para no tocar base.css */
+  .error-hero { min-height: 470px; }
+  .error-hero .error-label {
+    display: inline-flex; align-items: center; gap: 8px; margin-bottom: 6px;
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+    padding: 6px 16px; border-radius: 50px; font-size: .78rem; font-weight: 600;
+    color: var(--orange); letter-spacing: .5px;
+  }
+  .error-hero .error-code {
+    font-size: clamp(5.5rem, 20vw, 10rem); font-weight: 800; line-height: 1; letter-spacing: -2px;
+    color: var(--orange); margin-bottom: 6px; text-shadow: 0 8px 30px rgba(0,0,0,.35);
+  }
+  .error-hero p { margin-bottom: 26px; }
+  .error-hero .hero-btns { justify-content: center; align-items: center; }   /* centrado también en móvil (base.css los alinea a la izquierda ≤480px) */
+  .error-links { grid-template-columns: repeat(3, 1fr); max-width: 900px; margin-left: auto; margin-right: auto; }
+  @media (max-width: 700px) { .error-links { grid-template-columns: repeat(2, 1fr); gap: 14px; } .error-links .dept-card { padding: 22px 12px; } }
+  @media (max-width: 360px) { .error-links { grid-template-columns: 1fr; } }
+</style>
+<INCLURE{fond=inclures/cabeceraparatodos}{env} />
+
+
+
+</head>
+<body>
+
+<!-- TOPBAR -->
+<INCLURE{fond=inclures/topbar}{env} />
+
+<!-- NAVBAR -->
+<INCLURE{fond=inclures/navbar}{env} />
+
+
+
+
+
+
+
+<!-- ERROR 404 -->
+<div class="page-header error-hero">
+  <div class="inner">
+    <div class="error-label"><i class="fa fa-compass"></i> Error 404 · Página no encontrada</div>
+    <div class="error-code" aria-hidden="true">404</div>
+    <h1>Te saliste del <em>camino</em></h1>
+    <p>La página que buscas no existe, cambió de lugar o el enlace está incompleto. Vuelve al inicio o elige uno de nuestros caminos.</p>
+    <div class="hero-btns">
+      <a href="#URL_SITE_SPIP" class="btn-primary">Volver al inicio <i class="fa fa-arrow-right" style="margin-left:6px"></i></a>
+      <a href="http://localhost/sesteadero/-10-Caminos-pedagogicos-" class="btn-outline">Explorar los 10 caminos</a>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- FOOTER -->
+
+<INCLURE{fond=inclures/footer}{env} />
+
+<!-- BACK TO TOP -->
+<a href="#" class="back-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></a>
+
+<INCLURE{fond=inclures/jotaeses}{env} />
+
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<BOUCLE_principale(ARTICLES) {id_article}>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>#NOM_SITE_SPIP</title>
+
+<INCLURE{fond=inclures/cabeceraparatodos}{env} />
+
+
+
+</head>
+<body>
+
+<!-- TOPBAR -->
+<INCLURE{fond=inclures/topbar}{env} />
+
+<!-- NAVBAR -->
+<INCLURE{fond=inclures/navbar}{env} />
+
+
+
+
+<!-- PAGE HEADER -->
+<BOUCLE_hero_aleatorio(ARTICLES) {id_article=30}>
+  <BOUCLE_imagen_fondo(DOCUMENTS) {id_article} {extension IN jpg,png,gif,webp} {par hasard} {0,1}>
+<div class="page-header" style="background: linear-gradient(135deg, rgba(11,37,56,.88) 45%, rgba(11,37,56,.55) 100%), url('#URL_DOCUMENT') center/cover no-repeat;"></BOUCLE_imagen_fondo></BOUCLE_hero_aleatorio>
+
+</div>
+
+<!-- CONTENIDO DEL ARTÍCULO -->
+
+
+
+<!-- FOOTER -->
+
+<INCLURE{fond=inclures/footer}{env} />
+
+<!-- BACK TO TOP -->
+<a href="#" class="back-top" aria-label="Back to top"><i class="fa fa-arrow-up"></i></a>
+
+<INCLURE{fond=inclures/jotaeses}{env} />
+
+
+</body>
+</html>
+</BOUCLE_principale>
